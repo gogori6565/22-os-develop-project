@@ -18,7 +18,7 @@
 	}
 </style>
 </head>
-<body>s
+<body>
 	<%
 		String userID = null;
 		if(session.getAttribute("userID") != null){

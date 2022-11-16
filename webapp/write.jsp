@@ -80,10 +80,20 @@
 	  				<!-- Subject로 넘겨줄 칼럼값 선택 -->
 	  				<tr>
 	  					<td>
-	  						<select>
-	  							<option value="Subject_id">1</option>
-	  							<option value="Subject_id">2</option>
-	  						</select>
+	  						<div style="float:left;">
+	  							과목 : 
+		  						<select name="lectureDivide">
+	
+						          <option value="전체">과목 선택</option>
+						
+						          <option value="전공">오픈소스</option>
+						
+						          <option value="교양">자료구조</option>
+						
+						          <option value="기타">컴퓨터시스템개론</option>
+				
+				        		</select>
+	  						</div>
 	  					</td>
 	  				</tr>
 	  				<tr>
