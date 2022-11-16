@@ -8,7 +8,6 @@ public class Bbs {
 		private String bbsDate;
 		private String bbsContent;
 		private int bbsAvailable;
-		private int Subject;
 		
 		//우클릭 -> source -> Generate Getters and Setters
 		public int getBbsID() {
@@ -47,12 +46,5 @@ public class Bbs {
 		public void setBbsAvailable(int bbsAvailable) {
 			this.bbsAvailable = bbsAvailable;
 		}
-		public int getSubject() {
-			return Subject;
-		}
-		public void setSubject(int subject) {
-			this.Subject = subject;
-		}
-		
 		
 }

@@ -56,9 +56,8 @@ public class BbsDAO {
 		return -1; //데이터베이스 오류 - 게시글 번호로 -1 은 적절치 않음
 	}
 	
-	/*글 작성*/
-	public int write(String bbsTitle, String userID, String bbsContent, int Subject) {
-		String SQL = "INSERT INTO BBS VALUES (?, ?, ?, ?, ?, ?, ?)"; //마지막에 쓰인 글을 가져와서 그 글 번호에 +1 더한 값이 다음 글의 번호
+	public int write(String bbsTitle, String userID, String bbsContent) {
+		String SQL = "INSERT INTO BBS VALUES (?, ?, ?, ?, ?, ?)"; //마지막에 쓰인 글을 가져와서 그 글 번호에 +1 더한 값이 다음 글의 번호
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL); //위 SQL문장을 실행 준비 단계로 만듦
 			pstmt.setInt(1, getNext()); //다음 번에 쓰일 게시글 번호
@@ -67,7 +66,6 @@ public class BbsDAO {
 			pstmt.setString(4, getDate());
 			pstmt.setString(5, bbsContent);
 			pstmt.setInt(6, 1); //처음 글 쓸 때는 보여지는 거니까(삭제가 안된 거니까) PRIMARY KEY = 1
-			pstmt.setInt(7, 1);
 			
 			return pstmt.executeUpdate(); //0 이상의 결과 반환
 			
@@ -80,7 +78,7 @@ public class BbsDAO {
 	/*특정 페이지 번호(pageNumber)에 맞는 게시글 리스트를 반환*/
 	public ArrayList<Bbs> getList(int pageNumber){
 		//BBS 테이블에서 bbsID가 ?(85번째 줄 pstmt에 담길 숫자) 보다 작을 경우 AND bbsAvailable이 1인(삭제가 되지 않은 게시글) 게시글만 가져오고 그걸 bbsID로 내림차순 정렬하여 위에서 10개까지만 가져오기
-		String SQL = "SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC"; 
+		String SQL = "SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10"; 
 		ArrayList<Bbs> list = new ArrayList<Bbs>();
 		
 		try {
@@ -95,7 +93,6 @@ public class BbsDAO {
 				bbs.setBbsDate(rs.getString(4));
 				bbs.setBbsContent(rs.getString(5));
 				bbs.setBbsAvailable(rs.getInt(6));
-				bbs.setSubject(rs.getInt(7));
 				list.add(bbs);
 			}
 		} catch(Exception e) {
@@ -104,7 +101,7 @@ public class BbsDAO {
 		return list; //10개 뽑아온 게시글 리스트를 출력할 수 있게 반환
 	}
 	
-	/*페이징 처리
+	/*페이징 처리*/
 	public boolean nextPage(int pageNumber) {
 		String SQL = "SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1";
 		
@@ -119,9 +116,8 @@ public class BbsDAO {
 			e.printStackTrace();
 		}
 		return false; //다음페이지로 못 넘어감
-	}*/
+	}
 	
-	/*게시글 가져오기*/
 	public Bbs getBbs(int bbsID) {
 		String SQL = "SELECT * FROM BBS WHERE bbsID = ?"; //bbsID가 특정한 숫자(?)에 해당하는 게시글을 가져오기
 		
@@ -145,7 +141,6 @@ public class BbsDAO {
 		return null; //글이 존재하지 않는 경우
 	}
 	
-	/*글 수정*/
 	public int update(int bbsID, String bbsTitle, String bbsContent) { //글 번호, 글 제목, 글 내용 수정
 		String SQL = "UPDATE BBS SET bbsTitle = ?, bbsContent = ? WHERE bbsID = ?"; //특정한 아이디에 해당하는 제목과 내용을 바꿔주겠다.
 		try {
@@ -162,44 +157,13 @@ public class BbsDAO {
 		return -1; //데이터베이스 오류 - 게시글 번호로 -1 은 적절치 않음
 	}
 	
-	/*글 삭제*/
 	public int delete(int bbsID) {
-		String SQL = "DELETE FROM BBS WHERE bbsID = ?"; //글 삭제 해도 남아있도록 bbsAvailable 값만 0으로 바꿔줌
+		String SQL = "UPDATE BBS SET bbsAvailable = 0 WHERE bbsID = ?"; //글 삭제 해도 남아있도록 bbsAvailable 값만 0으로 바꿔줌
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL); //위 SQL문장을 실행 준비 단계로 만듦
 			pstmt.setInt(1, bbsID);
-			int suc = pstmt.executeUpdate();
-			if(suc!=0) { //삭제 성공 시,
-				
-				//게시글 전체 개수 구하기
-				SQL = "SELECT COUNT(*) FROM bbs";
-				int count=0;
-				try {
-					pstmt = conn.prepareStatement(SQL);
-					rs = pstmt.executeQuery();
-					if(rs.next()) {
-						count=rs.getInt(1);
-					}
-					
-					//뒷 게시글 bbsID -1씩 줄이기
-					SQL = "UPDATE bbs SET bbsID = ? WHERE bbsID = ?";
-					try {
-						for(int i=bbsID+1; i<=count+1; i++) {
-							pstmt = conn.prepareStatement(SQL);
-							pstmt.setInt(1, i-1);
-							pstmt.setInt(2, i);
-							pstmt.executeUpdate();
-						}
-					} catch(Exception e){
-						e.printStackTrace();
-					}
-					
-				} catch(Exception e) {
-					e.printStackTrace();
-				}
-			}
 			
-			return suc; //성공 시, 0 이상의 결과 반환
+			return pstmt.executeUpdate(); //성공 시, 0 이상의 결과 반환
 			
 		} catch(Exception e) {
 			e.printStackTrace();
