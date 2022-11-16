@@ -93,6 +93,7 @@
   					BbsDAO bbsDAO = new BbsDAO();
   					ArrayList<Bbs> list = bbsDAO.getList(pageNumber); //게시글 list 반환
   					for(int i=0; i<list.size(); i++){
+  						if(list.get(i).getSubject()==1){ //Subject 칼럼값 별로 띄우기
   				%>
   				<tr>
   					<td><%= list.get(i).getBbsID() %></td>
@@ -102,21 +103,11 @@
   					<td><%= list.get(i).getBbsDate().substring(0, 11) + list.get(i).getBbsDate().substring(11, 13) + "시 " + list.get(i).getBbsDate().substring(14, 16) + "분" %></td>
   				</tr>
   				<%
+  						}
   					}
   				%>
   			</tbody>
   		</table>
-  		<%
-  			if(pageNumber != 1){ //1이 아니라면 2페이지 이상이기 때문에 이전페이지로 돌아가는 것이 필요
-  		%>
-  			<a href="bbs.jsp?pageNumber=<%=pageNumber - 1 %>" class="btn btn-success btn-arraw-left">이전</a>
-  		<%
-  			} if(bbsDAO.nextPage(pageNumber + 1)){ //다음페이지가 존재한다면
-  		%>
-  			<a href="bbs.jsp?pageNumber=<%=pageNumber + 1 %>" class="btn btn-success btn-arraw-left">다음</a>
-  		<%	
-  			}
-  		%>
   		<a href="write.jsp" class="btn btn-primary pull-right">글쓰기</a>
   	</div>
   </div>
