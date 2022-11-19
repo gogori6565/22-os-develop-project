@@ -82,15 +82,15 @@
 	  					<td>
 	  						<div style="float:left;">
 	  							과목 : 
-		  						<select name="lectureDivide">
+		  						<select name="Subject_write">
 	
-						          <option value="전체">과목 선택</option>
+						          <option value="0">과목 선택</option>
 						
-						          <option value="전공">오픈소스</option>
+						          <option value="1">오픈소스</option>
 						
-						          <option value="교양">자료구조</option>
+						          <option value="2">자료구조</option>
 						
-						          <option value="기타">컴퓨터시스템개론</option>
+						          <option value="3">컴퓨터시스템개론</option>
 				
 				        		</select>
 	  						</div>

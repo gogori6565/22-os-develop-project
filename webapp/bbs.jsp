@@ -4,6 +4,7 @@
 <%@ page import="bbs.BbsDAO" %>
 <%@ page import="bbs.Bbs" %>
 <%@ page import="java.util.ArrayList" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +21,7 @@
 </head>
 <body>
 	<%
+		int SubID = 0;
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String)session.getAttribute("userID");
@@ -77,6 +79,21 @@
   		%>
   	</div>
   </nav>
+  <!-- 과목 선택 -->
+  <form name="SubID_send" method="post" action="bbs.jsp">
+	  <select name="Subject_bbs">
+	         <option value="1">오픈소스개발프로젝트</option>
+	         <option value="2">과목2</option>
+	         <option value="3">과목3</option>
+	         <option value="4">과목4</option>
+	  </select>
+	  <input type="submit" value="확인">
+  </form>
+  <%	if(request.getParameter("Subject_bbs")!=null){
+  			SubID = Integer.parseInt(request.getParameter("Subject_bbs")); 
+  		}
+  %>
+	
   <div class="container">
   	<div class="row">
   		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
@@ -93,7 +110,7 @@
   					BbsDAO bbsDAO = new BbsDAO();
   					ArrayList<Bbs> list = bbsDAO.getList(pageNumber); //게시글 list 반환
   					for(int i=0; i<list.size(); i++){
-  						if(list.get(i).getSubject()==1){ //Subject 칼럼값 별로 띄우기
+  						if(list.get(i).getSubject()==SubID){ //Subject 칼럼값 별로 띄우기
   				%>
   				<tr>
   					<td><%= list.get(i).getBbsID() %></td>

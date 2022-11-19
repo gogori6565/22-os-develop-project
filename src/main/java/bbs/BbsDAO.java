@@ -67,7 +67,7 @@ public class BbsDAO {
 			pstmt.setString(4, getDate());
 			pstmt.setString(5, bbsContent);
 			pstmt.setInt(6, 1); //처음 글 쓸 때는 보여지는 거니까(삭제가 안된 거니까) PRIMARY KEY = 1
-			pstmt.setInt(7, 1);
+			pstmt.setInt(7, Subject);
 			
 			return pstmt.executeUpdate(); //0 이상의 결과 반환
 			

@@ -29,7 +29,9 @@
 		} 
 		else{ //로그인 O
 
-			if(bbs.getBbsTitle()==null || bbs.getBbsContent() == null){
+			int SubID = Integer.parseInt(request.getParameter("Subject_write")); //select-option 태그에서 과목 ID 받아오기
+			
+			if(bbs.getBbsTitle()==null || bbs.getBbsContent() == null || SubID==0){ //SubID==0 : 과목을 선택하지 않은 경우
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('입력이 안 된 사항이 있습니다.')");
@@ -38,7 +40,7 @@
 			} 
 			else {
 				BbsDAO bbsDAO = new BbsDAO();
-				int result = bbsDAO.write(bbs.getBbsTitle(), userID, bbs.getBbsContent(), bbs.getSubject()); //위에서 jsp:setProperty로 속성값들을 받은 하나의 객체 user를 userDAO.join함수에 넘겨줌
+				int result = bbsDAO.write(bbs.getBbsTitle(), userID, bbs.getBbsContent(), SubID); //위에서 jsp:setProperty로 속성값들을 받은 하나의 객체 user를 userDAO.join함수에 넘겨줌
 				
 				if(result==-1){ //데이터베이스 오류
 					PrintWriter script = response.getWriter();
