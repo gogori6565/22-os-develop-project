@@ -12,7 +12,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width" initial-scale="1">
 <link rel="stylesheet" href="css/bootstrap.css">
-<title>JSP 게시판 웹 사이트</title>
+<title>충북대 소프트웨어학과 과목별 게시판</title>
 </head>
 <body>
 	<% 
@@ -24,12 +24,6 @@
 		int bbsID=0;
 		if(request.getParameter("bbsID")!=null){
 			bbsID=Integer.parseInt(request.getParameter("bbsID"));
-		}
-		
-		int pageNumber=1;
-		// pageNumber는 URL에서 가져온다.
-		if(request.getParameter("pageNumber")!=null){
-			pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
 		}
 		
 		if(bbsID==0){
@@ -51,7 +45,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="main.jsp">JSP 게시판 웹사이트 </a>
+			<a class="navbar-brand" href="main.jsp">충북대 소프트웨어학과 과목별 게시판</a>
 		</div>
 		
 		<%
@@ -79,22 +73,16 @@
 		<%
 			}else{
 		%>
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="main.jsp">메인</a></li>
-				<li class="active"><a href="bbs.jsp">게시판</a></li>
-			</ul>
 			<ul class="nav navbar-nav navbar-right">
-         		<li class="dropdown">
-           			<a href="#" class="dropdown-toggle" 
-                                data-toggle="dropdown" role="button" aria-haspopup="true" 
-            			aria-expanded="false">접속하기 <span class="caret"></span></a>
-        			<ul class="dropdown-menu">
-              			<li><a href="logoutAction.jsp">로그아웃</a></li>
-            		</ul>    
-         		</li>
-       		</ul>
-		</div>
+  			<li class="dropdown">
+  				<a href="#" class="dropdown-toggle"
+  					data-toggle="dropdown" role="button" aria-haspopup="true"
+  					aria-expanded="false">회원관리<span class="caret"></span></a>
+  				<ul class="dropdown-menu">
+  					<li><a href="logoutAction.jsp">로그아웃</a></li>
+  				</ul>
+  			</li>
+  		</ul>
 		<%
 			}
 		%>
@@ -129,42 +117,7 @@
 					
 				</tbody>
 			
-			</table>
-			<form method="post" action="replyAction.jsp?bbsID=<%= bbsID %>">
-				<table class="table table-striped"
-					style="text-align: center; border: 1px solid #dddddd">
-					<thead>
-						<tr>
-							<th colspan="3"
-								style="background-color: #eeeeeee; text-align: center;">댓글</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<%
-							ReplyDAO replyDAO=new ReplyDAO();
-							ArrayList<Reply> list=replyDAO.getList(bbsID, pageNumber);
-							for(int i=list.size()-1;i>=0;i--){
-							
-						%>
-
-						<tr>
-							<td style="text-align: left;"><%= list.get(i).getReplyContent() %></td>
-							<td style="text-align: right;"><%= list.get(i).getUserID() %>
-							
-							</td>
-						</tr>
-					
-						<%
-								}
-						%>
-						<td><textarea type="text" class="form-control"
-								placeholder="댓글을 입력하세요." name="replyContent" maxlength="2048"></textarea></td>
-						<td style="text-align: left; "></td>
-					
-					</tbody>
-				</table>
-				<input type="submit" class="btn" value="댓글입력">
+			
 			</form>
 			<br>
 			<a href="bbs.jsp" class="btn btn-primary">목록</a>
@@ -173,12 +126,75 @@
 				if(userID!=null && userID.equals(bbs.getUserID())){
 			%>
 				<a href="update.jsp?bbsID=<%= bbsID %>" class="btn btn-primary">수정</a>
-				<a href="deleteAction.jsp?bbsID=<%= bbsID %>" class="btn btn-primary">삭제</a>
+				<a onclick="return confirm('정말로 삭제하시겠습니까?')" 
+				href="deleteAction.jsp?bbsID=<%= bbsID %>" class="btn btn-primary">삭제</a>
 			
 			<%
 			} 
 			%>
-			
+		
+		
+	<div class="container">
+				<div class="row">
+					<table class="table table-striped"
+						style="text-align: center; border: 1px solid #dddddd">
+						<tbody>
+							<tr>
+								<td align="left" bgcolor="skyblue">댓글</td>
+							</tr>
+							<tr>
+								<%
+									ReplyDAO replyDAO = new ReplyDAO();
+									ArrayList<Reply> list = replyDAO.getList(bbsID);
+									for (int i = 0; i < list.size(); i++) {
+								%>
+								<div class="container">
+									<div class="row">
+										<table class="table table-striped"
+											style="text-align: center; border: 1px solid #dddddd">
+											<tbody>
+												<tr>
+													<td align="left"><%=list.get(i).getUserID()%></td>	
+												</tr>
+												<tr>
+													<td align="left"><%=list.get(i).getReplyContent()%></td>
+													<td align="right"><a
+														onclick="return confirm('정말로 삭제하시겠습니까?')"
+														href="replyDeleteAction.jsp?bbsID=<%=bbsID%>&replyID=<%=list.get(i).getReplyID()%>"
+														class="btn btn-danger">삭제</a></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<%
+									}
+								%>
+							</tr>
+					</table>
+				</div>
+			</div>
+			<br>
+			<div class="container">
+				<div class="row">
+					<form method="post" action="submitAction.jsp?bbsID=<%=bbsID%>">
+						<table class="table table-bordered"
+							style="text-align: center; border: 1px solid #dddddd">
+							<tbody>
+								<tr>
+									<td align="left"><%=userID%></td>
+								</tr>
+								<tr>
+									<td><input type="text" class="form-control"
+										placeholder="댓글 쓰기" name="replyContent" maxlength="300"></td>
+								</tr>
+							</tbody>
+						</table>
+						<input type="submit" class="btn btn-success pull-right"
+							value="댓글 쓰기">
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
 

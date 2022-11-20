@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width" , initial-scale="1">
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="custom/bootstrap.css">
-<title>JSP 게시판 웹 사이트</title>
+<title>충북대 소프트웨어학과 과목별 게시판</title>
 </head>
 <body>
 	<%
@@ -26,7 +26,7 @@
 				<span class="icon-bar"></span> 
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="main.jsp">JSP 게시판 웹 사이트</a>
+			<a class="navbar-brand" href="main.jsp">충북대 소프트웨어학과 과목별 게시판</a>
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
@@ -66,13 +66,17 @@
 			%>
 		</div>
 	</nav>
-	<div class="container">
-		<div class="jumbotron">
-			<h1>웹 사이트 소개</h1>
-			<!-- 내용 -->
-			<p> 이것은 jsp로 만든 웹사이트입니다.
-			<p><a class="btn btn-primary btn-pull" href="#" role="button">자세히 알아보기</a></p>
-			
+	<!-- 메인화면에 충북대학교 로고와 프로젝트 이름 넣기 -->
+	<style>
+	@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+	</style>
+	 <div style="width:100vw; height: 100vh; display: flex; align-items: center;">
+            <div style="text-align:center;  margin: 0 auto;"> 
+              <img src="images/cbnu.png" style="width:300px; height:300px; vertical-align: middle;">
+              <p style="font-size:40px; font-family: 'Gowun Dodum', sans-serif;;">충북대 소프트웨어학과 과목별 게시판</p>
+            </div>
+        </div>
+		
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 </body>

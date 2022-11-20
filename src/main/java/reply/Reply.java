@@ -1,30 +1,23 @@
 package reply;
 
 public class Reply {
-	
-	private int bbsID;
+	private String replyContent; 
 	private int replyID;
-	private String replyContent;
 	private String userID;
 	private int replyAvailable;
+	private int bbsID;
 	
-	public int getBbsID() {
-		return bbsID;
+	public String getReplyContent() {
+		return replyContent;
 	}
-	public void setBbsID(int bbsID) {
-		this.bbsID = bbsID;
+	public void setReplyContent(String replyContent) {
+		this.replyContent = replyContent;
 	}
 	public int getReplyID() {
 		return replyID;
 	}
 	public void setReplyID(int replyID) {
 		this.replyID = replyID;
-	}
-	public String getReplyContent() {
-		return replyContent;
-	}
-	public void setReplyContent(String replyContent) {
-		this.replyContent = replyContent;
 	}
 	public String getUserID() {
 		return userID;
@@ -37,5 +30,11 @@ public class Reply {
 	}
 	public void setReplyAvailable(int replyAvailable) {
 		this.replyAvailable = replyAvailable;
+	}
+	public int getBbsID() {
+		return bbsID;
+	}
+	public void setBbsID(int bbsID) {
+		this.bbsID = bbsID;
 	}
 }

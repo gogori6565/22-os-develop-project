@@ -59,11 +59,6 @@ public class BbsDAO {
 		String SQL="INSERT INTO BBS VALUES(?,?,?,?,?,?)";
 		try {
 			
-			// 1) 쿼리문장분석 2) 컴파일 3) 실행
-			// vs Statement
-			// 캐시 여부 => PreparedStatement 1)~3) 최초한번 실행 하고 캐시에 저장
-			// Statement 매번 1)~3) 실행
-			
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1,getNext());
 			pstmt.setString(2,bbsTitle);

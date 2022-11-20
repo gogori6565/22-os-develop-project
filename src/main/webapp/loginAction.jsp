@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JSP Web Site</title>
+<title>충북대 소프트웨어학과 과목별 게시판</title>
 </head>
 <body>
 	<%

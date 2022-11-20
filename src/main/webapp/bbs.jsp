@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width", initial-scale="1" >  <!-- 반응형 웹에 사용하는 메타태그 -->
 <link rel="stylesheet" href="css/bootstrap.css"> <!-- 참조  -->
 <link rel="stylesheet" href="css/custom.css">
-<title>JSP 게시판 웹 사이트</title>
+<title>충북대 소프트웨어학과 과목별 게시판</title>
 <style type = "text/css">
 </style>
 </head>
@@ -37,7 +37,7 @@
                 <span class ="icon-bar"></span>
                 <span class ="icon-bar"></span>
             </button>
-            <a class ="navbar-brand" href="main.jsp">JSP 게시판 웹 사이트</a>
+            <a class ="navbar-brand" href="main.jsp">충북대 소프트웨어학과 과목별 게시판</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
