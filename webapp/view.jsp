@@ -3,13 +3,16 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="bbs.Bbs" %>
 <%@ page import="bbs.BbsDAO" %>
+<%@ page import="reply.Reply" %>
+<%@ page import="reply.ReplyDAO" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 <meta name="viewport" content="width=device-width" initial-scale"="1">
 <link rel="stylesheet" href="css/bootstrap.css">
-<title>JSP 게시판 웹 사이트</title>
+<title>충북대 소프트웨어학과 과목별 게시판</title>
 </head>
 <body>
 	<%
@@ -41,7 +44,7 @@
   			<span class="icon-bar"></span>
   			<span class="icon-bar"></span>
   		</button>
-  		<a class="navbar-brand" href="main.jsp">JSP 게시판 웹 사이트</a>
+  		<a class="navbar-brand" href="main.jsp">충북대 소프트웨어학과 과목별 게시판</a>
   	</div>
   	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   		<ul class="nav navbar-nav">
@@ -118,7 +121,69 @@
   		<% 
   		 }
   		%>
-  		<input type="submit" class="btn btn-primary pull-right" value="글쓰기">
+  		<div class="container">
+            <div class="row">
+               <table class="table table-striped"
+                  style="text-align: center; border: 1px solid #dddddd">
+                  <tbody>
+                     <tr>
+                        <td align="left" bgcolor="skyblue">댓글</td>
+                     </tr>
+                     <tr>
+                        <%
+                           ReplyDAO replyDAO = new ReplyDAO();
+                           ArrayList<Reply> list = replyDAO.getList(bbsID);
+                           for (int i = 0; i < list.size(); i++) {
+                        %>
+                        <div class="container">
+                           <div class="row">
+                              <table class="table table-striped"
+                                 style="text-align: center; border: 1px solid #dddddd">
+                                 <tbody>
+                                    <tr>
+                                       <td align="left"><%=list.get(i).getUserID()%></td>   
+                                    </tr>
+                                    <tr>
+                                       <td align="left"><%=list.get(i).getReplyContent()%></td>
+                                       <td align="right"><a
+                                          onclick="return confirm('정말로 삭제하시겠습니까?')"
+                                          href="replyDeleteAction.jsp?bbsID=<%=bbsID%>&replyID=<%=list.get(i).getReplyID()%>"
+                                          class="btn btn-danger">삭제</a></td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                        <%
+                           }
+                        %>
+                     </tr>
+               </table>
+            </div>
+         </div>
+         <br>
+         <div class="container">
+            <div class="row">
+               <form method="post" action="submitAction.jsp?bbsID=<%=bbsID%>">
+                  <table class="table table-bordered"
+                     style="text-align: center; border: 1px solid #dddddd">
+                     <tbody>
+                        <tr>
+                           <td align="left"><%=userID%></td>
+                        </tr>
+                        <tr>
+                           <td><input type="text" class="form-control"
+                              placeholder="댓글 쓰기" name="replyContent" maxlength="300"></td>
+                        </tr>
+                     </tbody>
+                  </table>
+                  <input type="submit" class="btn btn-success pull-right"
+                     value="댓글 쓰기">
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
   	</div>
   </div> 
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
