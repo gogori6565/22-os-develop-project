@@ -3,6 +3,8 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="bbs.BbsDAO" %>
 <%@ page import="bbs.Bbs" %>
+<%@ page import="subject.Subject" %>
+<%@ page import="subject.SubjectDAO" %>
 <%@ page import="java.util.ArrayList" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
@@ -80,15 +82,103 @@
   	</div>
   </nav>
   <!-- 과목 선택 -->
-  <form name="SubID_send" method="post" action="bbs.jsp">
-	  <select name="Subject_bbs">
-	         <option value="1">오픈소스개발프로젝트</option>
-	         <option value="2">과목2</option>
-	         <option value="3">과목3</option>
-	         <option value="4">과목4</option>
-	  </select>
-	  <input type="submit" value="확인">
-  </form>
+  <div class = "container"><form name="Subject_Select" method="post" action = "bbs.jsp">
+        <select id="Grade" onchange="optionChange();">
+          <option>학년 선택</option>
+          <option value="1">1학년</option>
+          <option value="2">2학년</option>
+          <option value="3">3학년</option>
+          <option value="4">4학년</option>
+        </select>
+        <select name="Subject_bbs" id="Subject">
+          <option>과목 선택</option>
+        </select>
+     <input type="submit" value="확인">
+     </form>
+         <%
+       SubjectDAO subjectDAO = new SubjectDAO();
+       ArrayList<Subject> sublist = subjectDAO.getList();
+    %>
+     
+        <script>
+      function optionChange() {//옵션 바꾸는 함수
+        //1학년 일때
+        var a = ["1학년 과목 선택"];
+        <%
+        for(int i=0; i<sublist.size(); i++) {
+           if(sublist.get(i).getGrade()==1){
+           %>
+           a.push("<%= sublist.get(i).getSubName() %> - <%= sublist.get(i).getProfessor() %>");
+           <%
+           }}
+           %>
+        var b = ["2학년 과목 선택"];
+        <%
+        for(int i=0; i<sublist.size(); i++) {
+           if(sublist.get(i).getGrade()==2){
+           %>
+           b.push("<%= sublist.get(i).getSubName() %> - <%= sublist.get(i).getProfessor() %>");
+           <%
+           }}
+           %>
+        var c = ["3학년 과목 선택"];
+        <%
+        for(int i=0; i<sublist.size(); i++) {
+           if(sublist.get(i).getGrade()==3){
+           %>
+           c.push("<%= sublist.get(i).getSubName() %> - <%= sublist.get(i).getProfessor() %>");
+           <%
+           }}
+           %>
+        var d = ["4학년 과목 선택"];
+        <%
+        for(int i=0; i<sublist.size(); i++) {
+           if(sublist.get(i).getGrade()==4){
+           %>
+           d.push("<%= sublist.get(i).getSubName() %> - <%= sublist.get(i).getProfessor() %>");
+           <%
+           }}
+           %>
+        var v = $( '#Grade' ).val(); //학년 value 저장
+        var o;
+        if ( v == '1' ) {
+          o = a;
+        } else if ( v == '2' ) {
+          o = b;
+        } else if ( v == '3' ) {
+          o = c;
+        } else if ( v == '4') {
+           o = d;
+        } else {
+           o = [];
+        }
+           $( '#Subject' ).empty();
+           for ( var i = 0; i < o.length; i++ ) {
+                 
+        	   if(v=='1'){
+                   var ID = String(i);
+                   $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+                   
+                 }
+                 if(v=='2'){
+                    
+                    var ID = String(i+a.length);
+                    $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+                }
+                 if(v=='3'){
+                    var ID = String(i+a.length+b.length);
+                
+                    $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+                                          }
+                 if(v=='4'){
+                    var ID = String(i+a.length+b.length+c.length);
+                 
+                    $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+                    }
+
+           }
+      }
+    </script>
   <%	if(request.getParameter("Subject_bbs")!=null){
   			SubID = Integer.parseInt(request.getParameter("Subject_bbs")); 
   		}

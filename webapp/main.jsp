@@ -70,6 +70,7 @@
     <div style="width:100vw; height: 100vh; display: flex; align-items: center;">
             <div style="text-align:center;  margin: 0 auto;"> 
               <img src="images/cbnu.png" style="width:300px; height:300px; vertical-align: middle;">
+              <div style="height:30px;"></div>
               <p style="font-size:40px; font-family: 'Gowun Dodum', sans-serif;;">충북대 소프트웨어학과 과목별 게시판</p>
             </div>
         </div>

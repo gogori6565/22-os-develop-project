@@ -106,7 +106,7 @@
   				</tr>
   				<tr>
   					<td>내용</td>
-  					<td colspan="2" style="min-height: 200px; text-align: left;"><%= bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n","<br>") %></td>
+  					<td colspan="2" style="height: 300px; text-align: left;"><%= bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n","<br>") %></td>
   				</tr>
   			</tbody>
   		</table>
@@ -121,14 +121,34 @@
   		<% 
   		 }
   		%>
+  		<div style="height:30px;"></div>
+  		<div class="container">
+            <div class="row">
+               <form method="post" action="submitAction.jsp?bbsID=<%=bbsID%>">
+                  <table class="table table-bordered"
+                     style="text-align: center; border: 1px solid #dddddd">
+                     <tbody>
+                        <tr>
+                           <td align="left"  bgcolor="LightSteelBlue"><%=userID%></td>
+                        </tr>
+                        <tr>
+                           <td><input style="display: inline-block; width: 90%;" type="text" class="form-control"
+                              placeholder="댓글 쓰기" name="replyContent" maxlength="300">
+                              <input style="display: inline-block" type="submit" class="btn btn-success pull-right" value="댓글 쓰기">
+                           </td>
+                              
+                        </tr>
+                     </tbody>
+                  </table>
+               </form>
+            </div>
+         </div>
   		<div class="container">
             <div class="row">
                <table class="table table-striped"
                   style="text-align: center; border: 1px solid #dddddd">
                   <tbody>
-                     <tr>
-                        <td align="left" bgcolor="skyblue">댓글</td>
-                     </tr>
+
                      <tr>
                         <%
                            ReplyDAO replyDAO = new ReplyDAO();
@@ -141,7 +161,7 @@
                                  style="text-align: center; border: 1px solid #dddddd">
                                  <tbody>
                                     <tr>
-                                       <td align="left"><%=list.get(i).getUserID()%></td>   
+                                       <td align="left" style="width:100%;"><%=list.get(i).getUserID()%></td>   
                                     </tr>
                                     <tr>
                                        <td align="left"><%=list.get(i).getReplyContent()%></td>
@@ -162,26 +182,6 @@
             </div>
          </div>
          <br>
-         <div class="container">
-            <div class="row">
-               <form method="post" action="submitAction.jsp?bbsID=<%=bbsID%>">
-                  <table class="table table-bordered"
-                     style="text-align: center; border: 1px solid #dddddd">
-                     <tbody>
-                        <tr>
-                           <td align="left"><%=userID%></td>
-                        </tr>
-                        <tr>
-                           <td><input type="text" class="form-control"
-                              placeholder="댓글 쓰기" name="replyContent" maxlength="300"></td>
-                        </tr>
-                     </tbody>
-                  </table>
-                  <input type="submit" class="btn btn-success pull-right"
-                     value="댓글 쓰기">
-               </form>
-            </div>
-         </div>
       </div>
    </div>
   	</div>
