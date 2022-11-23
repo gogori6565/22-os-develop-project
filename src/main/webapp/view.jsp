@@ -15,6 +15,8 @@
 <title>소프트웨어학과 과목별 게시판</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&display=swap');
 body {
 background-color: #F0FFFF ;
 }
@@ -183,7 +185,7 @@ background-color: #F0FFFF ;
 			<table class="table table-striped" style="text-align:center; border :1px solid #dddddd" > <%-- 홀,짝 행 구분 --%>
 				<thead>
 					<tr>
-						<th colspan="3" style="background-color : #eeeeeee; text-align:center;">게시판 글 보기</th>
+						<th colspan="3" style="background-color : #eeeeeee; text-align:center; font-family: 'Gothic A1', sans-serif;">게시판 글 보기</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -210,14 +212,14 @@ background-color: #F0FFFF ;
 			
 			</form>
 			<br>
-			<a href="bbs.jsp" class="btn btn-primary">목록</a>
-			
+			<a href="bbs.jsp" class="btn btn-primary" style="color: black; background-color: #B0E0E6; font-family: 'Jua', sans-serif; font-size:15px;">목록</a>
+			  
 			<%
 				if(userID!=null && userID.equals(bbs.getUserID())){
 			%>
-				<a href="update.jsp?bbsID=<%= bbsID %>" class="btn btn-primary">수정</a>
+				<a href="update.jsp?bbsID=<%= bbsID %>" class="btn btn-primary" style="color: black; background-color: #B0E0E6; font-family: 'Jua', sans-serif; font-size:15px;">수정</a>
 				<a onclick="return confirm('정말로 삭제하시겠습니까?')" 
-				href="deleteAction.jsp?bbsID=<%= bbsID %>" class="btn btn-primary">삭제</a>
+				href="deleteAction.jsp?bbsID=<%= bbsID %>" class="btn btn-primary" style="color: black; background-color: #B0E0E6; font-family: 'Jua', sans-serif; font-size:15px;">삭제</a>
 			
 			<%
 			} 
@@ -230,7 +232,8 @@ background-color: #F0FFFF ;
 						style="text-align: center; border: 1px solid #dddddd">
 						<tbody>
 							<tr>
-								<td align="left" bgcolor="skyblue">댓글</td>
+								<td align="left" style="color: black; background-color: #B0E0E6; font-family: 'Jua', sans-serif; font-size:20px;" >댓글</td>
+								
 							</tr>
 							<tr>
 								<%
@@ -251,7 +254,7 @@ background-color: #F0FFFF ;
 													<td align="right"><a
 														onclick="return confirm('정말로 삭제하시겠습니까?')"
 														href="replyDeleteAction.jsp?bbsID=<%=bbsID%>&replyID=<%=list.get(i).getReplyID()%>"
-														class="btn btn-danger">삭제</a></td>
+														class="btn btn-danger" style="color: black; background-color: #FF6347 ; font-family: 'Jua', sans-serif; font-size:15px;"">삭제</a></td>
 												</tr>
 											</tbody>
 										</table>
@@ -275,13 +278,13 @@ background-color: #F0FFFF ;
 									<td align="left"><%=userID%></td>
 								</tr>
 								<tr>
-									<td><input type="text" class="form-control"
-										placeholder="댓글 쓰기" name="replyContent" maxlength="300"></td>
+									<td><input type="text" class="form-control" 
+										placeholder="댓글쓰기" name="replyContent" maxlength="500"></td>
 								</tr>
 							</tbody>
 						</table>
-						<input type="submit" class="btn btn-success pull-right"
-							value="댓글 쓰기">
+						<input type="submit" class="btn btn-success pull-right" style="color:black; background-color:#98FB98 ; font-family: 'Jua', sans-serif; font-size:15px;"
+							value="댓글쓰기">
 					</form>
 				</div>
 			</div>

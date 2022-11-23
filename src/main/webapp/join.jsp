@@ -12,6 +12,10 @@
 body {
 background-color: #F0FFFF ;
 }
+.btn{
+	background-color: #00BFFF;
+	border-color: #B0C4DE ;
+}
 /* navbar */
 .navbar-default {
     background-color: #F0FFFF ;
@@ -133,7 +137,7 @@ background-color: #F0FFFF ;
 		<div class="col-lg-4">
 			<div class="jumbotron" style="padding-top: 20px;">
 				<form method="post" action="joinAction.jsp">
-					<h3 style="text-align: center;">회원가입 화면</h3>
+					<h3 style="text-align: center; font-family: 'Jua', sans-serif;">회원가입 화면</h3>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="아이디" name="userID" maxlength="20">
 					</div>
@@ -146,7 +150,7 @@ background-color: #F0FFFF ;
 				
 						<input type="email" class="form-control" placeholder="이메일" name="userEmail" maxlength="20">
 						</div>
-						<input type="submit" class="btn btn-primary form-control" value="회원가입">
+						<input type="submit" class="btn btn-primary form-control" value="회원가입" style="font-family: 'Jua', sans-serif; font-size:20px">
 					</form>	
 				</div>
 			</div>	

@@ -10,8 +10,13 @@
 <title>소프트웨어학과 과목별 게시판</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&display=swap');
 body {
 background-color: #F0FFFF ;
+}
+.btn{
+	background-color: #00BFFF;
+	border-color: #B0C4DE ;
 }
 /* navbar */
 .navbar-default {
@@ -136,7 +141,7 @@ background-color: #F0FFFF ;
 		<div class="col-lg-4">
 			<div class="jumbotron" style="padding-top: 20px;">
 				<form method="post" action="loginAction.jsp">
-					<h3 style="text-align: center;">로그인 화면</h3>
+					<h3 style="text-align: center; font-family: 'Jua', sans-serif;">로그인 화면</h3>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="아이디" name="userID" maxlength="20">
 					</div>
@@ -145,7 +150,7 @@ background-color: #F0FFFF ;
 						<input type="password" class="form-control" placeholder="비밀번호" name="userPassword" maxlength="20">
 					</div>
 				
-					<input type="submit" class="btn btn-primary form-control" value="로그인">
+					<input type="submit" class="btn btn-primary form-control" value="로그인" style="font-family: 'Jua', sans-serif; font-size:17px;">
 				</form>	
 			</div>	
 		</div>

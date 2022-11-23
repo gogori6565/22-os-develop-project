@@ -300,7 +300,7 @@ background-color: #F0FFFF ;
 				</tbody>
 			</table>
 			
-				<input type="submit" class="btn btn-primary pull-right" value="글쓰기"  style="color: black; background-color: #FFFFE0;">
+				<input type="submit" class="btn btn-primary pull-right" value="글쓰기" style="color: black; background-color: #FFFFE0; font-family: 'Jua', sans-serif;">
 			</form>
 		</div>
 	
