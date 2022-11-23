@@ -74,7 +74,7 @@ public class BbsDAO {
 	}
 	
 	public ArrayList<Bbs> getList(int pageNumber){
-		String SQL="SELECT * FROM BBS WHERE bbsID<? AND bbsAvailable=1 ORDER BY bbsID DESC LIMIT 10";
+		String SQL="SELECT * FROM BBS WHERE bbsID<? AND bbsAvailable=1 ";
 		ArrayList<Bbs> list =new ArrayList<Bbs>();
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
@@ -97,7 +97,7 @@ public class BbsDAO {
 	}
 	
 	
-	public boolean nextPage(int pageNumber) {
+	/*public boolean nextPage(int pageNumber) {
 		String SQL="SELECT * FROM BBS WHERE bbsID<? AND bbsAvailable=1 ORDER BY bbsID DESC LIMIT 10";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
@@ -110,7 +110,7 @@ public class BbsDAO {
 			e.printStackTrace();
 		}
 		return false;
-	}
+	}*/
 	
 	public int delete(int BbsID) {
 		String SQL="UPDATE BBS SET bbsAvailable=0 WHERE BbsID=?";

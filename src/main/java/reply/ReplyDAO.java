@@ -75,7 +75,6 @@ public class ReplyDAO {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				System.out.println(rs.getInt(1)); // select문에서 첫번째 값
 				return rs.getInt(1)+1;  // 현재 인덱스(현재 게시글 개수) +1 반환
 			}
 			return 1;
