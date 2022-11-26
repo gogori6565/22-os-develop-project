@@ -82,7 +82,8 @@
   	</div>
   </nav>
   <!-- 과목 선택 -->
-  <div class = "container"><form name="Subject_Select" method="post" action = "bbs.jsp">
+  <div class = "container">
+  <form name="Subject_Select" method="post" action = "bbs.jsp">
         <select id="Grade" onchange="optionChange();">
           <option>학년 선택</option>
           <option value="1">1학년</option>
@@ -183,13 +184,14 @@
   			SubID = Integer.parseInt(request.getParameter("Subject_bbs")); 
   		}
   %>
+  </div>
 	
   <div class="container">
   	<div class="row">
   		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
   			<thead>
   				<tr>
-  					<th style="background-color: #eeeeee; text-align: center;">번호</th>
+  					<th style="background-color: #eeeeee; text-align: center;">글 분류</th>
   					<th style="background-color: #eeeeee; text-align: center;">제목</th>
   					<th style="background-color: #eeeeee; text-align: center;">작성자</th>
   					<th style="background-color: #eeeeee; text-align: center;">작성일</th>
@@ -203,7 +205,7 @@
   						if(list.get(i).getSubject()==SubID){ //Subject 칼럼값 별로 띄우기
   				%>
   				<tr>
-  					<td><%= list.get(i).getBbsID() %></td>
+  					<td style="color:red; font-weight: bold;"><%= list.get(i).getTopic() %></td>
   					<!-- 제목 누른 경우 해당 게시글 보여주는 페이지로 이동 - view.jsp 파일로 해당 게시글 번호(bbsID)를 매개변수로 보내줌-->
   					<td><a href="view.jsp?bbsID=<%= list.get(i).getBbsID() %>"><%=list.get(i).getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n","<br>") %></a></td>
   					<td><%= list.get(i).getUserID() %></td>

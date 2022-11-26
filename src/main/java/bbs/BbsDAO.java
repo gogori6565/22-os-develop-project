@@ -57,8 +57,8 @@ public class BbsDAO {
 	}
 	
 	/*글 작성*/
-	public int write(String bbsTitle, String userID, String bbsContent, int Subject) {
-		String SQL = "INSERT INTO BBS VALUES (?, ?, ?, ?, ?, ?, ?)"; //마지막에 쓰인 글을 가져와서 그 글 번호에 +1 더한 값이 다음 글의 번호
+	public int write(String bbsTitle, String userID, String bbsContent, int Subject, String topic) {
+		String SQL = "INSERT INTO BBS VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; //마지막에 쓰인 글을 가져와서 그 글 번호에 +1 더한 값이 다음 글의 번호
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL); //위 SQL문장을 실행 준비 단계로 만듦
 			pstmt.setInt(1, getNext()); //다음 번에 쓰일 게시글 번호
@@ -68,6 +68,7 @@ public class BbsDAO {
 			pstmt.setString(5, bbsContent);
 			pstmt.setInt(6, 1); //처음 글 쓸 때는 보여지는 거니까(삭제가 안된 거니까) PRIMARY KEY = 1
 			pstmt.setInt(7, Subject);
+			pstmt.setString(8, topic);
 			
 			return pstmt.executeUpdate(); //0 이상의 결과 반환
 			
@@ -96,6 +97,7 @@ public class BbsDAO {
 				bbs.setBbsContent(rs.getString(5));
 				bbs.setBbsAvailable(rs.getInt(6));
 				bbs.setSubject(rs.getInt(7));
+				bbs.setTopic(rs.getString(8));
 				list.add(bbs);
 			}
 		} catch(Exception e) {

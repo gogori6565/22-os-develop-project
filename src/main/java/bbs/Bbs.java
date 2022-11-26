@@ -9,6 +9,7 @@ public class Bbs {
 		private String bbsContent;
 		private int bbsAvailable;
 		private int Subject;
+		private String topic;
 		
 		//우클릭 -> source -> Generate Getters and Setters
 		public int getBbsID() {
@@ -53,6 +54,11 @@ public class Bbs {
 		public void setSubject(int subject) {
 			this.Subject = subject;
 		}
-		
+		public String getTopic() {
+			return topic;
+		}
+		public void setTopic(String topic) {
+			this.topic = topic;
+		}
 		
 }
