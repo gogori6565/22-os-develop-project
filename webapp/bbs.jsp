@@ -3,14 +3,17 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="bbs.BbsDAO" %>
 <%@ page import="bbs.Bbs" %>
+<%@ page import="subject.Subject" %>
+<%@ page import="subject.SubjectDAO" %>
 <%@ page import="java.util.ArrayList" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 <meta name="viewport" content="width=device-width" initial-scale"="1">
 <link rel="stylesheet" href="css/bootstrap.css">
-<title>JSP 게시판 웹 사이트</title>
+<title>충북대 소프트웨어학과 과목별 게시판</title>
 <style type="text/css">
 	a, a:hover{
 		color: #000000;
@@ -18,8 +21,9 @@
 	}
 </style>
 </head>
-<body>s
+<body>
 	<%
+		int SubID = 0;
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String)session.getAttribute("userID");
@@ -38,7 +42,7 @@
   			<span class="icon-bar"></span>
   			<span class="icon-bar"></span>
   		</button>
-  		<a class="navbar-brand" href="main.jsp">JSP 게시판 웹 사이트</a>
+  		<a class="navbar-brand" href="main.jsp">충북대 소프트웨어학과 과목별 게시판</a>
   	</div>
   	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   		<ul class="nav navbar-nav">
@@ -77,12 +81,133 @@
   		%>
   	</div>
   </nav>
+  <!-- 과목 선택 -->
+  <div class = "container">
+  <form name="Subject_Select" method="post" action = "bbs.jsp">
+        <select id="Grade" onchange="optionChange();">
+          <option>학년 선택</option>
+          <option value="1">1학년</option>
+          <option value="2">2학년</option>
+          <option value="3">3학년</option>
+          <option value="4">4학년</option>
+        </select>
+        <select name="Subject_bbs" id="Subject" onchange="optionChange2();">
+          <option>과목 선택</option>
+        </select>
+     <input type="submit" value="확인">
+     </form>
+     <p id="ClassTime">수업 시간 및 강의실</p>
+    <%
+       SubjectDAO subjectDAO = new SubjectDAO();
+       ArrayList<Subject> sublist = subjectDAO.getList();
+    %>
+     
+        <script>
+      function optionChange() {//옵션 바꾸는 함수
+        //1학년 일때
+        var a = ["1학년 과목 선택"];
+        <%
+        for(int i=0; i<sublist.size(); i++) {
+           if(sublist.get(i).getGrade()==1){
+           %>
+           a.push("<%= sublist.get(i).getSubName() %> - <%= sublist.get(i).getProfessor() %>");
+           <%
+           }}
+           %>
+        var b = ["2학년 과목 선택"];
+        <%
+        for(int i=0; i<sublist.size(); i++) {
+           if(sublist.get(i).getGrade()==2){
+           %>
+           b.push("<%= sublist.get(i).getSubName() %> - <%= sublist.get(i).getProfessor() %>");
+           <%
+           }}
+           %>
+        var c = ["3학년 과목 선택"];
+        <%
+        for(int i=0; i<sublist.size(); i++) {
+           if(sublist.get(i).getGrade()==3){
+           %>
+           c.push("<%= sublist.get(i).getSubName() %> - <%= sublist.get(i).getProfessor() %>");
+           <%
+           }}
+           %>
+        var d = ["4학년 과목 선택"];
+        <%
+        for(int i=0; i<sublist.size(); i++) {
+           if(sublist.get(i).getGrade()==4){
+           %>
+           d.push("<%= sublist.get(i).getSubName() %> - <%= sublist.get(i).getProfessor() %>");
+           <%
+           }}
+           %>
+        var v = $( '#Grade' ).val(); //학년 value 저장
+        var o;
+        if ( v == '1' ) {
+          o = a;
+        } else if ( v == '2' ) {
+          o = b;
+        } else if ( v == '3' ) {
+          o = c;
+        } else if ( v == '4') {
+           o = d;
+        } else {
+           o = [];
+        }
+           $( '#Subject' ).empty();
+           for ( var i = 0; i < o.length; i++ ) {
+                 
+        	   if(v=='1'){
+                   var ID = String(i);
+                   $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+                   
+                 }
+                 if(v=='2'){
+                    
+                    var ID = String(i+a.length);
+                    $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+                }
+                 if(v=='3'){
+                    var ID = String(i+a.length+b.length);
+                
+                    $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+                                          }
+                 if(v=='4'){
+                    var ID = String(i+a.length+b.length+c.length);
+                 
+                    $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+                    }
+
+           }
+      }
+      function optionChange2() {//옵션 바꾸는 함수
+          var value = parseInt($('#Subject').val())-1;
+            var classTime = [];
+          <%
+           for(int i=0; i<sublist.size(); i++) {
+              
+              %>
+              classTime.push('<%= sublist.get(i).getClassTime() %>');
+              <%
+              }
+              %>
+          $( '#ClassTime' ).empty();
+          $( '#ClassTime' ).append( '<p>' + classTime[value]+ '</p>' );
+       }
+
+    </script>
+  <%	if(request.getParameter("Subject_bbs")!=null){
+  			SubID = Integer.parseInt(request.getParameter("Subject_bbs")); 
+  		}
+  %>
+  </div>
+	
   <div class="container">
   	<div class="row">
   		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
   			<thead>
   				<tr>
-  					<th style="background-color: #eeeeee; text-align: center;">번호</th>
+  					<th style="background-color: #eeeeee; text-align: center;">글 분류</th>
   					<th style="background-color: #eeeeee; text-align: center;">제목</th>
   					<th style="background-color: #eeeeee; text-align: center;">작성자</th>
   					<th style="background-color: #eeeeee; text-align: center;">작성일</th>
@@ -93,30 +218,21 @@
   					BbsDAO bbsDAO = new BbsDAO();
   					ArrayList<Bbs> list = bbsDAO.getList(pageNumber); //게시글 list 반환
   					for(int i=0; i<list.size(); i++){
+  						if(list.get(i).getSubject()==SubID){ //Subject 칼럼값 별로 띄우기
   				%>
   				<tr>
-  					<td><%= list.get(i).getBbsID() %></td>
+  					<td style="color:red; font-weight: bold;"><%= list.get(i).getTopic() %></td>
   					<!-- 제목 누른 경우 해당 게시글 보여주는 페이지로 이동 - view.jsp 파일로 해당 게시글 번호(bbsID)를 매개변수로 보내줌-->
   					<td><a href="view.jsp?bbsID=<%= list.get(i).getBbsID() %>"><%=list.get(i).getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n","<br>") %></a></td>
   					<td><%= list.get(i).getUserID() %></td>
   					<td><%= list.get(i).getBbsDate().substring(0, 11) + list.get(i).getBbsDate().substring(11, 13) + "시 " + list.get(i).getBbsDate().substring(14, 16) + "분" %></td>
   				</tr>
   				<%
+  						}
   					}
   				%>
   			</tbody>
   		</table>
-  		<%
-  			if(pageNumber != 1){ //1이 아니라면 2페이지 이상이기 때문에 이전페이지로 돌아가는 것이 필요
-  		%>
-  			<a href="bbs.jsp?pageNumber=<%=pageNumber - 1 %>" class="btn btn-success btn-arraw-left">이전</a>
-  		<%
-  			} if(bbsDAO.nextPage(pageNumber + 1)){ //다음페이지가 존재한다면
-  		%>
-  			<a href="bbs.jsp?pageNumber=<%=pageNumber + 1 %>" class="btn btn-success btn-arraw-left">다음</a>
-  		<%	
-  			}
-  		%>
   		<a href="write.jsp" class="btn btn-primary pull-right">글쓰기</a>
   	</div>
   </div>

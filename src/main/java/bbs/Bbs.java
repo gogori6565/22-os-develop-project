@@ -8,6 +8,10 @@ public class Bbs {
 		private String bbsDate;
 		private String bbsContent;
 		private int bbsAvailable;
+		private int Subject;
+		private String topic;
+		private int currentpeople;
+		private int totalpeople;
 		
 		//우클릭 -> source -> Generate Getters and Setters
 		public int getBbsID() {
@@ -45,6 +49,30 @@ public class Bbs {
 		}
 		public void setBbsAvailable(int bbsAvailable) {
 			this.bbsAvailable = bbsAvailable;
+		}
+		public int getSubject() {
+			return Subject;
+		}
+		public void setSubject(int subject) {
+			this.Subject = subject;
+		}
+		public String getTopic() {
+			return topic;
+		}
+		public void setTopic(String topic) {
+			this.topic = topic;
+		}
+		public int getCurrentpeople() {
+			return currentpeople;
+		}
+		public void setCurrentpeople(int currentpeople) {
+			this.currentpeople = currentpeople;
+		}
+		public int getTotalpeople() {
+			return totalpeople;
+		}
+		public void setTotalpeople(int totalpeople) {
+			this.totalpeople = totalpeople;
 		}
 		
 }
