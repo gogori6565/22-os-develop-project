@@ -57,26 +57,28 @@ public class BbsDAO {
 	}
 	
 	/*글 작성*/
-	public int write(String bbsTitle, String userID, String bbsContent, int Subject, String topic) {
-		String SQL = "INSERT INTO BBS VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; //마지막에 쓰인 글을 가져와서 그 글 번호에 +1 더한 값이 다음 글의 번호
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL); //위 SQL문장을 실행 준비 단계로 만듦
-			pstmt.setInt(1, getNext()); //다음 번에 쓰일 게시글 번호
-			pstmt.setString(2, bbsTitle);
-			pstmt.setString(3, userID);
-			pstmt.setString(4, getDate());
-			pstmt.setString(5, bbsContent);
-			pstmt.setInt(6, 1); //처음 글 쓸 때는 보여지는 거니까(삭제가 안된 거니까) PRIMARY KEY = 1
-			pstmt.setInt(7, Subject);
-			pstmt.setString(8, topic);
-			
-			return pstmt.executeUpdate(); //0 이상의 결과 반환
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return -1; //데이터베이스 오류 - 게시글 번호로 -1 은 적절치 않음
-	}
+	public int write(String bbsTitle, String userID, String bbsContent, int Subject, String topic, int currentPeople, int totalPeople) {
+        String SQL = "INSERT INTO BBS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; //마지막에 쓰인 글을 가져와서 그 글 번호에 +1 더한 값이 다음 글의 번호
+        try {
+           PreparedStatement pstmt = conn.prepareStatement(SQL); //위 SQL문장을 실행 준비 단계로 만듦
+           pstmt.setInt(1, getNext()); //다음 번에 쓰일 게시글 번호
+           pstmt.setString(2, bbsTitle);
+           pstmt.setString(3, userID);
+           pstmt.setString(4, getDate());
+           pstmt.setString(5, bbsContent);
+           pstmt.setInt(6, 1); //처음 글 쓸 때는 보여지는 거니까(삭제가 안된 거니까) PRIMARY KEY = 1
+           pstmt.setInt(7, Subject);
+           pstmt.setString(8, topic);
+           pstmt.setInt(9, currentPeople);
+           pstmt.setInt(10, totalPeople);
+           
+           return pstmt.executeUpdate(); //0 이상의 결과 반환
+           
+        } catch(Exception e) {
+           e.printStackTrace();
+        }
+        return -1; //데이터베이스 오류 - 게시글 번호로 -1 은 적절치 않음
+     }
 	
 	/*특정 페이지 번호(pageNumber)에 맞는 게시글 리스트를 반환*/
 	public ArrayList<Bbs> getList(int pageNumber){
@@ -98,6 +100,8 @@ public class BbsDAO {
 				bbs.setBbsAvailable(rs.getInt(6));
 				bbs.setSubject(rs.getInt(7));
 				bbs.setTopic(rs.getString(8));
+				bbs.setCurrentpeople(rs.getInt(9));
+				bbs.setTotalpeople(rs.getInt(10));
 				list.add(bbs);
 			}
 		} catch(Exception e) {
@@ -139,6 +143,10 @@ public class BbsDAO {
 				bbs.setBbsDate(rs.getString(4));
 				bbs.setBbsContent(rs.getString(5));
 				bbs.setBbsAvailable(rs.getInt(6));
+				bbs.setSubject(rs.getInt(7));
+				bbs.setTopic(rs.getString(8));
+				bbs.setCurrentpeople(rs.getInt(9));
+				bbs.setTotalpeople(rs.getInt(10));
 				return bbs;
 			}
 		} catch(Exception e) {

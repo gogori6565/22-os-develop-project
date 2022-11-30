@@ -91,12 +91,13 @@
           <option value="3">3학년</option>
           <option value="4">4학년</option>
         </select>
-        <select name="Subject_bbs" id="Subject">
+        <select name="Subject_bbs" id="Subject" onchange="optionChange2();">
           <option>과목 선택</option>
         </select>
      <input type="submit" value="확인">
      </form>
-         <%
+     <p id="ClassTime">수업 시간 및 강의실</p>
+    <%
        SubjectDAO subjectDAO = new SubjectDAO();
        ArrayList<Subject> sublist = subjectDAO.getList();
     %>
@@ -179,6 +180,21 @@
 
            }
       }
+      function optionChange2() {//옵션 바꾸는 함수
+          var value = parseInt($('#Subject').val())-1;
+            var classTime = [];
+          <%
+           for(int i=0; i<sublist.size(); i++) {
+              
+              %>
+              classTime.push('<%= sublist.get(i).getClassTime() %>');
+              <%
+              }
+              %>
+          $( '#ClassTime' ).empty();
+          $( '#ClassTime' ).append( '<p>' + classTime[value]+ '</p>' );
+       }
+
     </script>
   <%	if(request.getParameter("Subject_bbs")!=null){
   			SubID = Integer.parseInt(request.getParameter("Subject_bbs")); 

@@ -5,6 +5,8 @@
 <%@ page import="bbs.BbsDAO" %>
 <%@ page import="reply.Reply" %>
 <%@ page import="reply.ReplyDAO" %>
+<%@ page import="team.Team" %>
+<%@ page import="team.TeamDAO" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
@@ -108,13 +110,80 @@
   					<td>내용</td>
   					<td colspan="2" style="height: 300px; text-align: left;"><%= bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n","<br>") %></td>
   				</tr>
+  				<%
+  					//'팀 구해요'게시글 이라면,
+  					String str1 = "팀 구해요";
+  					if(str1.equals(bbs.getTopic())){
+  				%>
+  				<%
+	            	TeamDAO teamDAO= new TeamDAO();
+	            	ArrayList<Team> list = teamDAO.getList();
+                %>
+  				<tr>
+  					<td>팀 매칭 현황</td>
+  					<td colspan="2"><%= bbs.getCurrentpeople() + " / " + bbs.getTotalpeople()%></td>
+  				</tr>
+  				<tr>
+  					<td>팀 신청하기</td>
+  					<td colspan="2"><a href="teamAction.jsp?userID=<%= userID %>&bbsID=<%= bbsID %>" class="btn btn-primary">팀 신청하기</a></td>
+  				</tr>
+  				<tr>
+  					<td>팀 신청자 목록</td>
+  					<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  					<%
+			  		 	if(userID != null && userID.equals(bbs.getUserID())){ //글 사용자가 해당 글의 작성자와 동일하다면
+			  		%>
+  					<td colspan="2">
+  					영입할 멤버 고르세요 : 
+  					<form method="post" action="viewAction.jsp?bbsID=<%= bbsID%>">
+	                    <select id="member" name="member">
+		                    <option>멤버</option>
+	                    </select>
+	                    <input type="submit" class="btn btn-primary pull-right" value="영입">
+                    </form>
+				    <script>
+		            	var mem = [];
+                    <%
+		            	for(int i=0; i<list.size(); i++) {
+		            		if(list.get(i).getBbsID()==bbs.getBbsID()&&list.get(i).getTeamcheck()==0){
+		            %>
+			            mem.push("<%= list.get(i).getUserID() %>");
+		            <% 
+		            		} 
+		            	}
+		            %>
+			            for ( var i = 0; i < mem.length; i++ ) {
+			            	$( '#member' ).append( '<option value='+mem[i]+'>' + mem[i]+ '</option>' );
+			            }
+		            </script>
+		            <%
+				  		 	}
+		            %>
+		            
+		            </br></br>
+		            <%
+						for(int i=0; i<list.size(); i++) {
+							if(list.get(i).getBbsID()==bbs.getBbsID()&&list.get(i).getTeamcheck()==0){
+		            %>
+		            <%= "신청자 : "+list.get(i).getUserID()+" " %>
+		            
+		            <%
+							}
+						} 
+		            %>
+  					</td>
+  				</tr>
+  				<%
+  					//글 작성자만 볼 수 있게 하는 if문 끝 괄호
+  					}
+  				%>
   			</tbody>
   		</table>
   		<a href="bbs.jsp" class="btn btn-primary">목록</a>
   		<%
   		 	if(userID != null && userID.equals(bbs.getUserID())){ //글 사용자가 해당 글의 작성자와 동일하다면
   			
-  		 		//update.jsp에 해당글의 ID를 가져갈 수 있게 함 (아래 코드 설명)
+  		 		//update.jsp에 해의 ID를 가져갈 수 있게 함 (아래 코드 설명)
   		%>
   				<a href="update.jsp?bbsID=<%= bbsID %>" class="btn btn-primary">수정</a>
   				<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="deleteAction.jsp?bbsID=<%= bbsID %>" class="btn btn-primary">삭제</a>
@@ -123,69 +192,70 @@
   		%>
   		<div style="height:30px;"></div>
   		<div class="container">
-            <div class="row">
-               <form method="post" action="submitAction.jsp?bbsID=<%=bbsID%>">
-                  <table class="table table-bordered"
-                     style="text-align: center; border: 1px solid #dddddd">
-                     <tbody>
-                        <tr>
-                           <td align="left"  bgcolor="LightSteelBlue"><%=userID%></td>
-                        </tr>
-                        <tr>
-                           <td><input style="display: inline-block; width: 90%;" type="text" class="form-control"
-                              placeholder="댓글 쓰기" name="replyContent" maxlength="300">
-                              <input style="display: inline-block" type="submit" class="btn btn-success pull-right" value="댓글 쓰기">
-                           </td>
-                              
-                        </tr>
-                     </tbody>
-                  </table>
-               </form>
-            </div>
-         </div>
-  		<div class="container">
-            <div class="row">
-               <table class="table table-striped"
-                  style="text-align: center; border: 1px solid #dddddd">
-                  <tbody>
-
-                     <tr>
-                        <%
-                           ReplyDAO replyDAO = new ReplyDAO();
-                           ArrayList<Reply> list = replyDAO.getList(bbsID);
-                           for (int i = 0; i < list.size(); i++) {
-                        %>
-                        <div class="container">
-                           <div class="row">
-                              <table class="table table-striped"
-                                 style="text-align: center; border: 1px solid #dddddd">
-                                 <tbody>
-                                    <tr>
-                                       <td align="left" style="width:100%;"><%=list.get(i).getUserID()%></td>   
-                                    </tr>
-                                    <tr>
-                                       <td align="left"><%=list.get(i).getReplyContent()%></td>
-                                       <td align="right"><a
-                                          onclick="return confirm('정말로 삭제하시겠습니까?')"
-                                          href="replyDeleteAction.jsp?bbsID=<%=bbsID%>&replyID=<%=list.get(i).getReplyID()%>"
-                                          class="btn btn-danger">삭제</a></td>
-                                    </tr>
-                                 </tbody>
-                              </table>
-                           </div>
-                        </div>
-                        <%
-                           }
-                        %>
-                     </tr>
-               </table>
-            </div>
-         </div>
-         <br>
-      </div>
-   </div>
-  	</div>
-  </div> 
+				<div class="row">
+					<table class="table table-striped"
+						style="text-align: center; border: 1px solid #dddddd">
+						<tbody>
+							<tr>
+								<td align="left" style="color: black; background-color: #B0E0E6; font-family: 'Jua', sans-serif; font-size:20px;" >댓글</td>
+								
+							</tr>
+							<tr>
+								<%
+									ReplyDAO replyDAO = new ReplyDAO();
+									ArrayList<Reply> list2 = replyDAO.getList(bbsID);
+									for (int i = 0; i < list2.size(); i++) {
+								%>
+								<div class="container">
+									<div class="row">
+										<table class="table table-striped"
+											style="text-align: center; border: 1px solid #dddddd">
+											<tbody>
+												<tr>
+													<td align="left" style="width:100%;"><%=list2.get(i).getUserID()%></td>	
+												</tr>
+												<tr>
+													<td align="left"><%=list2.get(i).getReplyContent()%></td>
+													<!-- 댓글 삭제 버튼 -->
+													<td align="right"><a
+														onclick="return confirm('정말로 삭제하시겠습니까?')"
+														href="replyDeleteAction.jsp?bbsID=<%=bbsID%>&replyID=<%=list2.get(i).getReplyID()%>"
+														class="btn btn-danger" style="color: black; background-color: #FF6347 ; font-family: 'Jua', sans-serif; font-size:15px;"">삭제</a></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<%
+									}
+								%>
+							</tr>
+					</table>
+				</div>
+			</div>
+			<br>
+			<div class="container">
+				<div class="row">
+					<form method="post" action="submitAction.jsp?bbsID=<%=bbsID%>">
+						<table class="table table-bordered"
+							style="text-align: center; border: 1px solid #dddddd">
+							<tbody>
+								<tr>
+									<td align="left"><%=userID%></td>
+								</tr>
+								<tr>
+									<td><input type="text" class="form-control" 
+										placeholder="댓글쓰기" name="replyContent" maxlength="500"></td>
+								</tr>
+							</tbody>
+						</table>
+						<input type="submit" class="btn btn-success pull-right" style="color:black; background-color:#98FB98 ; font-family: 'Jua', sans-serif; font-size:15px;"
+							value="댓글쓰기">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script src="js/bootstrap.js"></script>
 </body>

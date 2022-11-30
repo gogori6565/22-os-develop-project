@@ -84,16 +84,29 @@
 	  				</tr>
 	  				<tr>
 	  					<td>
-	  						<div style="float:left;">
-	  						글 분류 : 
-	  							<select name="topic">
-						          <option>글 분류 선택</option>
-						          <option value="질문">질문</option>
-						          <option value="과제">과제</option>
-						          <option value="팀 구해요">팀 구해요</option>
-						          <option value="수다">수다</option>
-							     </select>
-	  						</div>
+	  						<div style="float:left;" id="writeOption">
+                       글 분류 : 
+                          <select id= "topic" name="topic" onchange="optionChange2();">
+                            <option>글 분류 선택</option>
+                            <option value="질문">질문</option>
+                            <option value="과제">과제</option>
+                            <option value="팀 구해요">팀 구해요</option>
+                            <option value="수다">수다</option>
+                          </select>
+                          <script>
+                          function optionChange2() {//옵션 바꾸는 함수
+                   			if ($('#topic').val() == "팀 구해요") {
+                   				$( '#writeOption' ).append( ' 현재 인원 : <select name="currentPeople" id="currentPeople"></select>  총 인원 : <select name="totalPeople" id="totalPeople"></select>' );
+                       			for ( var i = 0; i < 11; i++ ) {
+                             		var strI = String(i)
+                                 	$( '#currentPeople' ).append( '<option value='+strI+'>' + strI + '</option>' );
+                             		$( '#totalPeople' ).append( '<option value='+strI+'>' + strI + '</option>' );
+                                 
+                      			}
+                    		}
+                  			}
+                    </script>
+                       </div>
 	  					</td>
 	  				</tr>
 	  				<!-- Subject로 넘겨줄 칼럼값 선택 -->

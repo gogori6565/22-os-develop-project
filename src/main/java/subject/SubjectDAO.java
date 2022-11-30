@@ -34,6 +34,7 @@ public class SubjectDAO {
             sub.setSubName(rs.getString(2));
             sub.setProfessor(rs.getString(3));
             sub.setGrade(rs.getInt(4));
+            sub.setClassTime(rs.getString(5));
             list.add(sub);
          }
       } catch (Exception e) {
