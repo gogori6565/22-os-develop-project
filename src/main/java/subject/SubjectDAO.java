@@ -12,16 +12,18 @@ public class SubjectDAO {
    private ResultSet rs;
    
    public SubjectDAO() {
-      try {
-         String dbURL = "jdbc:mysql://localhost:3306/BBS?useSSL=false&user=root&password=1234";
-         String dbID = "root";
-         String dbPassword = "1234";
-         Class.forName("com.mysql.jdbc.Driver");
-         conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-   }
+	   try {
+			String dbURL="jdbc:mysql://localhost:3306/BBS?serverTimezone=Asia/Seoul&useSSL=false";	
+			String dbID="root";
+			String dbPassword="7979";
+			Class.forName("com.mysql.cj.jdbc.Driver"); //드라이버 로드
+			conn =DriverManager.getConnection(dbURL,dbID,dbPassword); // 연결 얻기 
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+   
    public ArrayList<Subject> getList() {
       String SQL = "SELECT *FROM SUBJECT ORDER BY SubID";
       ArrayList<Subject> list = new ArrayList<Subject>();

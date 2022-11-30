@@ -4,7 +4,7 @@ public class Subject {
    private int subID;
    private String subName;
    private String professor;
-   
+   private String classTime;
    public int getSubID() {
       return subID;
    }
@@ -29,5 +29,11 @@ public class Subject {
    public void setGrade(int grade) {
       this.grade = grade;
    }
-   private int grade;
+   public String getClassTime() {
+	return classTime;
+}
+public void setClassTime(String classTime) {
+	this.classTime = classTime;
+}
+private int grade;
 }

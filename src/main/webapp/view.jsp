@@ -9,26 +9,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width" initial-scale="1">
-<link rel="stylesheet" href="css/bootstrap.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width", initial-scale="1" >  <!-- 반응형 웹에 사용하는 메타태그 -->
+<link rel="stylesheet" href="css/bootstrap.css"> <!-- 참조  -->
+<link rel="stylesheet" href="css/custom.css">
 <title>소프트웨어학과 과목별 게시판</title>
+<style type = "text/css">
+</style>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap');
+//드롭다운
+select {
+  /* 생략 */
+  font-family: "Noto Sansf KR", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+
+  color: #444;
+  background-color: #fff;
+
+  padding: 0.6em 1.4em 0.5em 0.8em;
+  margin: 0;
+
+  border: 1px solid #aaa;
+  border-radius: 0.5em;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+}
 body {
 background-color: #F0FFFF ;
+}
+th {
+font-family: 'Gothic A1', sans-serif;
+}
+td {
+font-family: 'Gothic A1', sans-serif;
 }
 /* navbar */
 .navbar-default {
     background-color: #F0FFFF ;
     border-color: #B0C4DE ;
+    font-size : 17px;
 }
 /* title */
 .navbar-default .navbar-brand {
     color: #000080;
     font-family: 'Jua', sans-serif;
+    font-size : 20px;
+    color: #4169E1;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
@@ -72,6 +105,7 @@ background-color: #F0FFFF ;
     border-top-color: #000080;
     border-bottom-color: #000080;
 }
+
 /* mobile version */
 .navbar-default .navbar-toggle {
     border-color: #DDD;
@@ -91,8 +125,9 @@ background-color: #F0FFFF ;
 .dropdown-toggle {
 	background-color:  #F0FFFF; 
 }
-.table table-striped{
-	background-color: #ffffff;
+.table-striped{
+	background-color: #FFFFFF;
+	border-color:#1E90FF;
 }
 
 @media (max-width: 767px) {
@@ -140,15 +175,16 @@ background-color: #F0FFFF ;
 			<a class="navbar-brand" href="main.jsp">소프트웨어학과 과목별 게시판</a>
 		</div>
 		
-		<%
-			if(userID==null){
-		
-		%>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="main.jsp">메인</a></li>
-				<li><a href="bbs.jsp">게시판</a></li>
+				<li><a href="main.jsp">메인</a></li>
+				<li class="active"><a href="bbs.jsp">게시판</a></li>
 			</ul>
+			
+			<%
+				if(userID==null){
+			
+			%>
 			<ul class="nav navbar-nav navbar-right">
          		<li class="dropdown">
            			<a href="#" class="dropdown-toggle" 
@@ -182,54 +218,49 @@ background-color: #F0FFFF ;
 	</nav>
 	<div class="container">
 		<div class="row">
-			<table class="table table-striped" style="text-align:center; border :1px solid #dddddd" > <%-- 홀,짝 행 구분 --%>
+			<table class="table table-striped" style="text-align:center; border :1.5px solid #000000;" > <%-- 홀,짝 행 구분 --%>
 				<thead>
 					<tr>
-						<th colspan="3" style="background-color : #eeeeeee; text-align:center; font-family: 'Gothic A1', sans-serif;">게시판 글 보기</th>
+						<th colspan="2" style="background-color : #eeeeeee; text-align:center; font-family: 'Noto Sans KR', sans-serif; font-size:20px;">게시판 글 보기</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td style="width:20%;">글 제목 </td>	
-						<td colspan="2"><%= bbs.getBbsTitle() %></td>
+						<td style="width:20%; font-family: 'Noto Sans KR', sans-serif; font-size:17px;">글 제목 </td>	
+						<td colspan="2" style="text-align:left; font-family:'Noto Sans KR', sans-serif; font-size:15px;"><%= bbs.getBbsTitle() %></td>
 					</tr>
 					<tr>
-						<td >작성자 </td>	
-						<td colspan="2"><%= bbs.getUserID() %></td>
+						<td style="font-family: 'Noto Sans KR', sans-serif; font-size:17px;">작성자 </td>	
+						<td colspan="2" style="text-align:left; font-family:'Noto Sans KR', sans-serif; font-size:15px;"><%= bbs.getUserID() %></td>
 					</tr>
 					<tr>
-						<td >작성일자</td>	
-						<td colspan="2"><%= bbs.getBbsDate().substring(0,11)+bbs.getBbsDate().substring(11,13)+"시"+bbs.getBbsDate().substring(14,16)+"분" %></td>
+						<td style="width:20%; font-family: 'Noto Sans KR', sans-serif; font-size:17px;">작성일자</td>	
+						<td colspan="2" style="text-align:left; font-family:'Noto Sans KR', sans-serif; font-size:15px;"><%= bbs.getBbsDate().substring(0,11)+bbs.getBbsDate().substring(11,13)+"시"+bbs.getBbsDate().substring(14,16)+"분" %></td>
 					</tr>
 					<tr>
-						<td >내용</td>	
-						<td colspan="2" style="min-height:200px; text-align:left;"><%= bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>;") %></td>
+						<td style="width:20%; font-family: 'Noto Sans KR', sans-serif; font-size:17px;">내용</td>	
+						<td colspan="2" style="min-height:200px; text-align:left; font-family:'Noto Sans KR', sans-serif; font-size:15px;"><%= bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>;") %></td>
 					</tr>
-					
-					
 				</tbody>
-			
-			
 			</form>
 			<br>
-			<a href="bbs.jsp" class="btn btn-primary" style="color: black; background-color: #B0E0E6; font-family: 'Jua', sans-serif; font-size:15px;">목록</a>
+			<a href="bbs.jsp" class="btn btn-primary" style="color: black; background-color: #B0E0E6; font-family: 'Jua', sans-serif; font-size:17px;">목록</a>
 			  
 			<%
 				if(userID!=null && userID.equals(bbs.getUserID())){
 			%>
-				<a href="update.jsp?bbsID=<%= bbsID %>" class="btn btn-primary" style="color: black; background-color: #B0E0E6; font-family: 'Jua', sans-serif; font-size:15px;">수정</a>
-				<a onclick="return confirm('정말로 삭제하시겠습니까?')" 
-				href="deleteAction.jsp?bbsID=<%= bbsID %>" class="btn btn-primary" style="color: black; background-color: #B0E0E6; font-family: 'Jua', sans-serif; font-size:15px;">삭제</a>
+				<a href="update.jsp?bbsID=<%= bbsID %>" class="btn btn-primary" style="color: black; background-color: #B0E0E6; font-family: 'Jua', sans-serif; font-size:17px;">수정</a>
+				<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="deleteAction.jsp?bbsID=<%= bbsID %>" class="btn btn-primary" style="color: black; background-color: #B0E0E6; font-family: 'Jua', sans-serif; font-size:17px;">삭제</a>
 			
 			<%
 			} 
 			%>
 		
-		
-	<div class="container">
+		<div style="height:30px;"></div>
+		<div class="container">
 				<div class="row">
 					<table class="table table-striped"
-						style="text-align: center; border: 1px solid #dddddd">
+						style="text-align: center; border: 1px solid #AFEEEE">
 						<tbody>
 							<tr>
 								<td align="left" style="color: black; background-color: #B0E0E6; font-family: 'Jua', sans-serif; font-size:20px;" >댓글</td>
@@ -247,13 +278,13 @@ background-color: #F0FFFF ;
 											style="text-align: center; border: 1px solid #dddddd">
 											<tbody>
 												<tr>
-													<td align="left"><%=list.get(i).getUserID()%></td>	
+													<td align="left" style="width:100; font-family: 'Nanum Gothic Coding', monospace; font-size:17px;"><%=list.get(i).getUserID()%></td>	
 												</tr>
 												<tr>
-													<td align="left"><%=list.get(i).getReplyContent()%></td>
+													<td align="left" style="font-family: 'Nanum Gothic Coding', monospace; font-size:15px;"><%=list.get(i).getReplyContent()%></td>
 													<td align="right"><a
 														onclick="return confirm('정말로 삭제하시겠습니까?')"
-														href="replyDeleteAction.jsp?bbsID=<%=bbsID%>&replyID=<%=list.get(i).getReplyID()%>"
+														href="replyDeleteAction.jsp?bbsID= <%=bbsID%>&replyID=<%=list.get(i).getReplyID()%>"
 														class="btn btn-danger" style="color: black; background-color: #FF6347 ; font-family: 'Jua', sans-serif; font-size:15px;"">삭제</a></td>
 												</tr>
 											</tbody>
@@ -291,7 +322,7 @@ background-color: #F0FFFF ;
 		</div>
 	</div>
 
-	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="js/bootstrap.js"></script>
 </body>
 </html>

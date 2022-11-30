@@ -12,19 +12,28 @@
 body {
 background-color: #F0FFFF ;
 }
-.btn{
-	background-color: #00BFFF;
-	border-color: #B0C4DE ;
+th {
+font-family: 'Gothic A1', sans-serif;
+}
+td {
+font-family: 'Gothic A1', sans-serif;
 }
 /* navbar */
 .navbar-default {
     background-color: #F0FFFF ;
     border-color: #B0C4DE ;
+    font-size : 17px;
+    padding:20px;
 }
 /* title */
 .navbar-default .navbar-brand {
     color: #000080;
     font-family: 'Jua', sans-serif;
+    font-size : 20px;
+    color: #4169E1;
+    padding-top :10px;
+    padding-bottom : 10px;
+    padding-right: 30px;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
@@ -34,6 +43,9 @@ background-color: #F0FFFF ;
 .navbar-default .navbar-nav > li > a {
     color: #000080;
     font-family: 'Jua', sans-serif;
+    padding-top :10px;
+    padding-bottom : 10px;
+    padding-right: 20px;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
@@ -87,9 +99,11 @@ background-color: #F0FFFF ;
 .dropdown-toggle {
 	background-color:  #F0FFFF; 
 }
-.table table-striped{
-	background-color: #ffffff;
+.table-striped{
+	background-color: #FFFFFF;
+	border-color:#1E90FF;
 }
+
 
 @media (max-width: 767px) {
     .navbar-default .navbar-nav .open .dropdown-menu > li > a {
@@ -100,6 +114,8 @@ background-color: #F0FFFF ;
         color: #333;
     }
 }
+
+
 </style>
 </head>
 <body>
@@ -150,7 +166,7 @@ background-color: #F0FFFF ;
 				
 						<input type="email" class="form-control" placeholder="이메일" name="userEmail" maxlength="20">
 						</div>
-						<input type="submit" class="btn btn-primary form-control" value="회원가입" style="font-family: 'Jua', sans-serif; font-size:20px">
+						<input type="submit" class="btn btn-primary form-control" value="회원가입" style="font-family: 'Jua', sans-serif; font-size:20px; color:#ffffff; background-color: #00BFFF">
 					</form>	
 				</div>
 			</div>	
