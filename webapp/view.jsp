@@ -121,25 +121,51 @@
                 %>
   				<tr>
   					<td>팀 매칭 현황</td>
-  					<td colspan="2"><%= bbs.getCurrentpeople() + " / " + bbs.getTotalpeople()%></td>
+  					<td colspan="2"><%= bbs.getCurrentpeople() + " / " + bbs.getTotalpeople()%>
+  					</br>
+  					<%
+						for(int i=0; i<list.size(); i++) {
+							if(list.get(i).getBbsID()==bbs.getBbsID()&&list.get(i).getTeamcheck()==1){
+		            %>
+					            <div style="float:left;"><%= "영입 멤버 : "+list.get(i).getUserID()+" " %></div></br>
+		            <%
+							}
+						} 
+		            %>
+		            </td>
   				</tr>
   				<tr>
   					<td>팀 신청하기</td>
-  					<td colspan="2"><a href="teamAction.jsp?userID=<%= userID %>&bbsID=<%= bbsID %>" class="btn btn-primary">팀 신청하기</a></td>
+  					<%
+			  		 	if(userID != null && userID.equals(bbs.getUserID())){ //글 사용자가 해당 글의 작성자와 동일하다면
+			  		%>
+  						<td colspan="2"><a onclick="return confirm('본인은 신청하실 수 없습니다.')" class="btn btn-primary">팀 신청하기</a></td>
+  					<%
+			  		 	} else{
+			  		%>
+			  			<td colspan="2"><a href="teamAction.jsp?userID=<%= userID %>&bbsID=<%= bbsID %>" class="btn btn-primary">팀 신청하기</a></td>
+			  		<%
+			  		 	}
+			  		%>
   				</tr>
   				<tr>
   					<td>팀 신청자 목록</td>
   					<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  					<%
-			  		 	if(userID != null && userID.equals(bbs.getUserID())){ //글 사용자가 해당 글의 작성자와 동일하다면
-			  		%>
   					<td colspan="2">
-  					영입할 멤버 고르세요 : 
   					<form method="post" action="viewAction.jsp?bbsID=<%= bbsID%>">
+	                   <div style="float:left;">
+	                   영입할 멤버 고르세요 :
 	                    <select id="member" name="member">
 		                    <option>멤버</option>
 	                    </select>
-	                    <input type="submit" class="btn btn-primary pull-right" value="영입">
+	                    <%
+			  		 		if(userID != null && userID.equals(bbs.getUserID())){ //글 사용자가 해당 글의 작성자와 동일하다면
+			  			%>
+	                    	<input type="submit" value="영입">
+	                    <%
+			  		 		}
+			  			%>
+			  			</div></br>
                     </form>
 				    <script>
 		            	var mem = [];
@@ -147,7 +173,7 @@
 		            	for(int i=0; i<list.size(); i++) {
 		            		if(list.get(i).getBbsID()==bbs.getBbsID()&&list.get(i).getTeamcheck()==0){
 		            %>
-			            mem.push("<%= list.get(i).getUserID() %>");
+			            		mem.push("<%= list.get(i).getUserID() %>");
 		            <% 
 		            		} 
 		            	}
@@ -156,17 +182,14 @@
 			            	$( '#member' ).append( '<option value='+mem[i]+'>' + mem[i]+ '</option>' );
 			            }
 		            </script>
-		            <%
-				  		 	}
-		            %>
 		            
-		            </br></br>
+		            </br>
+		            
 		            <%
 						for(int i=0; i<list.size(); i++) {
 							if(list.get(i).getBbsID()==bbs.getBbsID()&&list.get(i).getTeamcheck()==0){
 		            %>
-		            <%= "신청자 : "+list.get(i).getUserID()+" " %>
-		            
+					            <div style="float:left;"><%= "신청자 : "+list.get(i).getUserID()+" " %></div></br>
 		            <%
 							}
 						} 
@@ -174,7 +197,7 @@
   					</td>
   				</tr>
   				<%
-  					//글 작성자만 볼 수 있게 하는 if문 끝 괄호
+  					//'팀 구해요' 게시글 이라면 보이게 하는 if문 끝 괄호
   					}
   				%>
   			</tbody>

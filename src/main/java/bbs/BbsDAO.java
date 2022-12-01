@@ -216,4 +216,19 @@ public class BbsDAO {
 		}
 		return -1; //데이터베이스 오류
 	}
+	
+	/*팀 영입 시, CurrentPeople 값 +1 증가*/
+	public int CPupdate(int bbsID) {
+		String SQL = "UPDATE BBS SET CurrentPeople=CurrentPeople+1 WHERE bbsID = ?"; //특정한 아이디에 해당하는 제목과 내용을 바꿔주겠다.
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL); //위 SQL문장을 실행 준비 단계로 만듦
+			pstmt.setInt(1, bbsID);
+			
+			return pstmt.executeUpdate(); //성공 시, 0 이상의 결과 반환
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //데이터베이스 오류 - 게시글 번호로 -1 은 적절치 않음
+	}
 }
