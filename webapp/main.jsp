@@ -10,6 +10,113 @@
 <title>충북대 소프트웨어학과 과목별 게시판</title>
 </head>
 <body>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+body {
+background-color: #F0FFFF ;
+}
+/* navbar */
+.navbar-default {
+    background-color: #F0FFFF ;
+    border-color: #F0FFFF;
+    font-size : 20px;
+    padding:20px;
+ 
+}
+
+/* title */
+.navbar-default .navbar-brand {
+    color: #000080;
+    font-family: 'Jua', sans-serif;
+    font-size : 25px;
+    color: #000080;
+    padding-top :10px;
+    padding-bottom : 10px;
+    padding-right: 30px;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #5E5E5E;
+}
+/* link */
+.navbar-default .navbar-nav > li > a {
+
+    color: #000080;
+    font-family: 'Jua', sans-serif;
+    padding-top :10px;
+    padding-bottom : 10px;
+    padding-right: 20px;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #333;
+    
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #000080;
+    background-color: #B0E0E6; //메뉴바 선택했을때
+    font-family: 'Jua', sans-serif;
+   padding:10px;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #000080;
+    background-color: #B0E0E6; 
+   padding:10px;
+}
+/* caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #000080;
+    border-bottom-color: #000080;
+    font-size : 17px;
+    
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #000080;
+    border-bottom-color: #000080;
+    font-size : 17px;
+}
+.navbar-default .navbar-nav > .open > a .caret, 
+.navbar-default .navbar-nav > .open > a:hover .caret, 
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: #000080;
+    border-bottom-color: #000080;
+    font-size : 17px;
+}
+/* mobile version */
+.navbar-default .navbar-toggle {
+    border-color: #DDD;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #DDD;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #CCC;
+}
+.dropdown-menu {
+   color: #000080;
+   background-color: #B0E0E6;
+   font-family: 'Jua', sans-serif; 
+}
+.dropdown-toggle {
+   background-color:  #F0FFFF; 
+}
+
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color:  #000080;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #333;
+    }
+}
+</style>
 	<%
 		String userID = null;
 		if(session.getAttribute("userID") != null){

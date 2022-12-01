@@ -7,6 +7,113 @@
 <meta name="viewport" content="width=device-width" initial-scale"="1">
 <link rel="stylesheet" href="css/bootstrap.css">
 <title>충북대 소프트웨어학과 과목별 게시판</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+body {
+background-color: #F0FFFF ;
+}
+/* navbar */
+.navbar-default {
+    background-color: #F0FFFF ;
+    border-color: #F0FFFF;
+    font-size : 20px;
+    padding:20px;
+ 
+}
+
+/* title */
+.navbar-default .navbar-brand {
+    color: #000080;
+    font-family: 'Jua', sans-serif;
+    font-size : 25px;
+    color: #000080;
+    padding-top :10px;
+    padding-bottom : 10px;
+    padding-right: 30px;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #5E5E5E;
+}
+/* link */
+.navbar-default .navbar-nav > li > a {
+
+    color: #000080;
+    font-family: 'Jua', sans-serif;
+    padding-top :10px;
+    padding-bottom : 10px;
+    padding-right: 20px;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #333;
+    
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #000080;
+    background-color: #B0E0E6; //메뉴바 선택했을때
+    font-family: 'Jua', sans-serif;
+   padding:10px;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #000080;
+    background-color: #B0E0E6; 
+   padding:10px;
+}
+/* caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #000080;
+    border-bottom-color: #000080;
+    font-size : 17px;
+    
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #000080;
+    border-bottom-color: #000080;
+    font-size : 17px;
+}
+.navbar-default .navbar-nav > .open > a .caret, 
+.navbar-default .navbar-nav > .open > a:hover .caret, 
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: #000080;
+    border-bottom-color: #000080;
+    font-size : 17px;
+}
+/* mobile version */
+.navbar-default .navbar-toggle {
+    border-color: #DDD;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #DDD;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #CCC;
+}
+.dropdown-menu {
+   color: #000080;
+   background-color: #B0E0E6;
+   font-family: 'Jua', sans-serif; 
+}
+.dropdown-toggle {
+   background-color:  #F0FFFF; 
+}
+
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color:  #000080;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #333;
+    }
+}
+</style>
 </head>
 <body>
   <nav class="navbar navbar-default">
@@ -38,22 +145,22 @@
   		</ul>
   	</div>
   </nav>
-  <div class="container">
-  	<div class="col-lg-4"></div>
-  	<div class="col-lg-4">
-  		<div class="jumbotron" style="padding-top: 20px;">
-  			<form method="post" action="joinAction.jsp">
-  				<h3 style="text-align: center;">회원가입 화면</h3>
-  				<div class="form-group">
-  					<input type="text" class="form-control" placeholder="아이디" name="userID" maxlength="20">
-  				</div>
-  				<div class="form-group">
-  					<input type="password" class="form-control" placeholder="비밀번호" name="userPassword" maxlength="20">
-  				</div>
-  				<div class="form-group">
-  					<input type="text" class="form-control" placeholder="이름" name="userName" maxlength="20">
-  				</div>
-  				<div class="form-group" style="text-align: center;">
+  <div class="container"> 
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
+         <div class="jumbotron" style="padding-top: 20px;">
+            <form method="post" action="joinAction.jsp">
+               <h3 style="text-align: center; font-family: 'Jua', sans-serif;">회원가입 화면</h3>
+               <div class="form-group">
+                  <input type="text" class="form-control" placeholder="아이디" name="userID" maxlength="20">
+               </div>
+               <div class="form-group">
+                  <input type="password" class="form-control" placeholder="비밀번호" name="userPassword" maxlength="20">
+               </div>
+               <div class="form-group">
+                  <input type="text" class="form-control" placeholder="이름" name="userName" maxlength="20">
+               </div>
+               <div class="form-group" style="text-align: center;">
   					<div class="btn-group" data-toggle="buttons">
   						<label class="btn btn-primary active">
   							<input type="radio" name="userGender" autocomplete="off" value="남자" checked>남자
@@ -63,15 +170,14 @@
   						</label>
   					</div>
   				</div>
-  				<div class="form-group">
-  					<input type="email" class="form-control" placeholder="이메일" name="userEmail" maxlength="50">
-  				</div>
-  				<input type="submit" class="btn btn-primary form-control" value="회원가입">
-  			</form>
-  		</div>
-  	</div>
-  	<div class="col-lg-4"></div>
-  </div>
+                  <input type="email" class="form-control" placeholder="이메일" name="userEmail" maxlength="20">
+                  </div>
+                  <input type="submit" class="btn btn-primary form-control" value="회원가입" style="height:40px; font-family: 'Jua', sans-serif; font-size:20px; color:#ffffff; background-color: #4169E1">
+               </form>   
+            </div>
+         </div>   
+         <div class="col-lg-4"></div>
+      </div>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script src="js/bootstrap.js"></script>
 </body>

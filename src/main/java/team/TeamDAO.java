@@ -70,7 +70,20 @@ public class TeamDAO {
 			pstmt.setInt(2, bbsID); 
 			pstmt.setString(3, userID); 
 			
-			return pstmt.executeUpdate(); //성공 시, 0 이상의 결과 반환
+			int suc=pstmt.executeUpdate(); //성공 시, 0 이상의 결과 반환
+			
+			if(suc!=0) { //성공 시,
+				SQL = "UPDATE BBS SET CurrentPeople=CurrentPeople+1 WHERE bbsID = ?"; //특정한 아이디에 해당하는 제목과 내용을 바꿔주겠다.
+				try {
+					pstmt = conn.prepareStatement(SQL); //위 SQL문장을 실행 준비 단계로 만듦
+					pstmt.setInt(1, bbsID);
+					
+					return pstmt.executeUpdate(); //성공 시, 0 이상의 결과 반환
+					
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
 			
 		} catch(Exception e) {
 			e.printStackTrace();
