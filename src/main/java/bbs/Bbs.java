@@ -74,5 +74,4 @@ public class Bbs {
 		public void setTotalpeople(int totalpeople) {
 			this.totalpeople = totalpeople;
 		}
-		
 }

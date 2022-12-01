@@ -12,6 +12,139 @@
 <meta name="viewport" content="width=device-width" initial-scale"="1">
 <link rel="stylesheet" href="css/bootstrap.css">
 <title>충북대 소프트웨어학과 과목별 게시판</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+select {
+  /* 생략 */
+  font-family: "Noto Sansf KR", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #444;
+  background-color: #fff;
+  padding: 0.6em 1.4em 0.5em 0.8em;
+  margin: 0;
+  border: 1px solid #aaa;
+  border-radius: 0.5em;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+}
+body {
+background-color: #F0FFFF ;
+}
+/* navbar */
+.navbar-default {
+    background-color: #F0FFFF ;
+    border-color: #F0FFFF;
+    font-size : 20px;
+    padding:20px;
+ 
+}
+
+/* title */
+.navbar-default .navbar-brand {
+    color: #000080;
+    font-family: 'Jua', sans-serif;
+    font-size : 25px;
+    color: #000080;
+    padding-top :10px;
+    padding-bottom : 10px;
+    padding-right: 30px;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #5E5E5E;
+}
+/* link */
+.navbar-default .navbar-nav > li > a {
+
+    color: #000080;
+    font-family: 'Jua', sans-serif;
+    padding-top :10px;
+    padding-bottom : 10px;
+    padding-right: 20px;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #333;
+    
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #000080;
+    background-color: #B0E0E6; //메뉴바 선택했을때
+    font-family: 'Jua', sans-serif;
+   padding:10px;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #000080;
+    background-color: #B0E0E6; 
+   padding:10px;
+}
+/* caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #000080;
+    border-bottom-color: #000080;
+    font-size : 17px;
+    
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #000080;
+    border-bottom-color: #000080;
+    font-size : 17px;
+}
+.navbar-default .navbar-nav > .open > a .caret, 
+.navbar-default .navbar-nav > .open > a:hover .caret, 
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: #000080;
+    border-bottom-color: #000080;
+    font-size : 17px;
+}
+/* mobile version */
+.navbar-default .navbar-toggle {
+    border-color: #DDD;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #DDD;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #CCC;
+}
+.dropdown-menu {
+   color: #000080;
+   background-color: #B0E0E6;
+   font-family: 'Jua', sans-serif; 
+}
+.dropdown-toggle {
+   background-color:  #F0FFFF; 
+}
+table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+    background-color: #FFFAFA; 
+  
+  }
+  th, td {
+    border-bottom: 1.5px solid #dddddd;
+    padding: 10px;
+    text-align: center;
+    height: 45px;
+  }
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color:  #000080;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #333;
+    }
+}
+</style>
 </head>
 <body>
 	<%
@@ -30,7 +163,7 @@
   			<span class="icon-bar"></span>
   			<span class="icon-bar"></span>
   		</button>
-  		<a class="navbar-brand" href="main.jsp">JSP 게시판 웹 사이트</a>
+  		<a class="navbar-brand" href="main.jsp">충북대 소프트웨어학과 과목별 게시판</a>
   	</div>
   	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   		<ul class="nav navbar-nav">
@@ -69,17 +202,18 @@
   		%>
   	</div>
   </nav>
-  <div class="container">
-  	<div class="row">
-  		<form method="post" action="writeAction.jsp">
-	  		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-	  			<thead>
-	  				<tr>
-	  					<th colspan="2" style="background-color: #eeeeee; text-align: center;">게시판 글쓰기 양식</th>
-	  				</tr>
-	  			</thead>
-	  			<tbody>
-	  				<tr>
+     <div class="container"> 
+      <div class = "row">
+         <form method="post" action="writeAction.jsp">
+         <table class="table table-striped" style="text-align:center; border:1px solid #B0E0E6;"> 
+            <thead>
+             <div style="height:50px;"></div>
+               <tr>
+                  <th colspan="2" style="background-color: #B0E0E6; color: #000080; font-family: 'Jua', sans-serif; font-size:20px; text-align: center;">게시판 글쓰기 양식</th>
+               </tr>
+            </thead>
+            <tbody>
+            		<tr>
 	  					<td><input type="text" class="form-control" placeholder="글 제목" name="bbsTitle" maxlength="50"></td>
 	  				</tr>
 	  				<tr>
@@ -218,7 +352,7 @@
 	  				</tr>
 	  			</tbody>
 	  		</table>
-	  		<input type="submit" class="btn btn-primary pull-right" value="글쓰기">
+	  		<input type="submit" class="btn btn-primary pull-right" value="글쓰기" style="color: #000080; background-color: #B0E0E6; font-family: 'Jua', sans-serif; font-size:20px;">
   		</form>
   	</div>
   </div>

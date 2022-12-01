@@ -10,15 +10,159 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<meta name="viewport" content="width=device-width" initial-scale"="1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width", initial-scale="1" > 
 <link rel="stylesheet" href="css/bootstrap.css">
-<title>충북대 소프트웨어학과 과목별 게시판</title>
-<style type="text/css">
-	a, a:hover{
-		color: #000000;
-		text-decoration: none;
-	}
+<link rel="stylesheet" href="css/custom.css">
+<title>소프트웨어학과 과목별 게시판</title>
+<style type = "text/css">
+</style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap');
+select {
+  /* 생략 */
+  font-family: "Noto Sansf KR", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #444;
+  background-color: #fff;
+  padding: 0.6em 1.4em 0.5em 0.8em;
+  margin: 0;
+  border: 1px solid #aaa;
+  border-radius: 0.5em;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+}
+body {
+background-color: #F0FFFF ;
+}
+th {
+font-family: 'Gothic A1', sans-serif;
+font-size : 20px;
+}
+td {
+font-family: 'Nanum Gothic Coding', monospace;
+font-size : 17px;
+}
+/* navbar */
+.navbar-default {
+    background-color: #F0FFFF ;
+    border-color: #F0FFFF;
+    font-size : 20px;
+    padding:20px;
+}
+/* title */
+.navbar-default .navbar-brand {
+    color: #000080;
+    font-family: 'Jua', sans-serif;
+    font-size : 25px;
+    color: #000080;
+    padding-top :10px;
+    padding-bottom : 10px;
+    padding-right: 30px;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #5E5E5E;
+}
+/* link */
+.navbar-default .navbar-nav > li > a {
+    color: #000080;
+    font-family: 'Jua', sans-serif;
+    padding-top :10px;
+    padding-bottom : 10px;
+    padding-right: 20px;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #333;
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #000080;
+    background-color: #B0E0E6; //메뉴바 선택했을때
+    font-family: 'Jua', sans-serif;
+   	padding:10px;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #000080;
+    background-color: #B0E0E6; 
+    padding:10px;
+   
+}
+/* caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #000080;
+    border-bottom-color: #000080;
+    font-size : 17px;
+    
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #000080;
+    border-bottom-color: #000080;
+    font-size : 17px;
+}
+.navbar-default .navbar-nav > .open > a .caret, 
+.navbar-default .navbar-nav > .open > a:hover .caret, 
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: #000080;
+    border-bottom-color: #000080;
+    font-size : 17px;
+}
+ table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+    background-color: #FFFAFA; 
+   
+   
+  }
+  th, td {
+    border-bottom: 1px solid #B0E0E6;
+    padding: 10px;
+    text-align: center;
+    height: 45px;
+  }
+  thead tr {
+    background-color:#B0E0E6;
+    color: black;
+  }
+/* mobile version */
+.navbar-default .navbar-toggle {
+    border-color: #DDD;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #DDD;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #CCC;
+}
+.dropdown-menu {
+   color: #000080;
+   background-color: #B0E0E6;
+   font-family: 'Jua', sans-serif; 
+}
+.dropdown-toggle {
+   background-color:  #F0FFFF; 
+}
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color:  #000080;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #333;
+    }
+}
 </style>
 </head>
 <body>
@@ -82,6 +226,7 @@
   	</div>
   </nav>
   <!-- 과목 선택 -->
+  <div style="height:20px;"></div>
   <div class = "container">
   <form name="Subject_Select" method="post" action = "bbs.jsp">
         <select id="Grade" onchange="optionChange();">
@@ -94,9 +239,9 @@
         <select name="Subject_bbs" id="Subject" onchange="optionChange2();">
           <option>과목 선택</option>
         </select>
-     <input type="submit" value="확인">
+      <input type="submit" value="확인" style="text-align : center; font-family: 'Jua', sans-serif; font-size:20px; background-color:#FA8072; border-color:#FA8072; border-radius:5px;">
      </form>
-     <p id="ClassTime">수업 시간 및 강의실</p>
+     <div style ="display:inline; font-family: 'Jua', sans-serif; font-size:18px;" class="pull-right">수업시간 및 강의실 : </div>
     <%
        SubjectDAO subjectDAO = new SubjectDAO();
        ArrayList<Subject> sublist = subjectDAO.getList();
@@ -202,17 +347,18 @@
   %>
   </div>
 	
-  <div class="container">
-  	<div class="row">
-  		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-  			<thead>
-  				<tr>
-  					<th style="background-color: #eeeeee; text-align: center;">글 분류</th>
-  					<th style="background-color: #eeeeee; text-align: center;">제목</th>
-  					<th style="background-color: #eeeeee; text-align: center;">작성자</th>
-  					<th style="background-color: #eeeeee; text-align: center;">작성일</th>
-  				</tr>
-  			</thead>
+	<div style="height:15px;"></div>
+          <div class ="container">
+        <div class="row">
+            <table class="table" style="text-align:center; border:1.7px solid  #F0FFFF;">
+                <thead>
+                    <tr>
+                        <th style="text-align:center;">글 분류</th>
+                        <th style="text-align:center;">제목</th>
+                        <th style="text-align:center;">작성자</th>
+                        <th style="text-align:center;">작성일</th>
+                    </tr>
+                </thead>
   			<tbody>
   				<%
   					BbsDAO bbsDAO = new BbsDAO();
@@ -221,11 +367,11 @@
   						if(list.get(i).getSubject()==SubID){ //Subject 칼럼값 별로 띄우기
   				%>
   				<tr>
-  					<td style="color:red; font-weight: bold;"><%= list.get(i).getTopic() %></td>
-  					<!-- 제목 누른 경우 해당 게시글 보여주는 페이지로 이동 - view.jsp 파일로 해당 게시글 번호(bbsID)를 매개변수로 보내줌-->
-  					<td><a href="view.jsp?bbsID=<%= list.get(i).getBbsID() %>"><%=list.get(i).getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n","<br>") %></a></td>
-  					<td><%= list.get(i).getUserID() %></td>
-  					<td><%= list.get(i).getBbsDate().substring(0, 11) + list.get(i).getBbsDate().substring(11, 13) + "시 " + list.get(i).getBbsDate().substring(14, 16) + "분" %></td>
+  					<td style="font-family: 'Gothic A1', sans-serif; color:red; font-weight: bold;"><%=list.get(i).getTopic() %></td>
+                        <td style="font-family: 'Gothic A1', sans-serif;"><a href="view.jsp?bbsID=<%=list.get(i).getBbsID()%>" style="color:#000000; text-decoration:none;" ><%=list.get(i).getBbsTitle() %></a></td>
+                        <td style="font-family: 'Gothic A1', sans-serif;"><%=list.get(i).getUserID() %></td>
+                        <td style="font-family: 'Gothic A1', sans-serif;"><%=list.get(i).getBbsDate().substring(0,11) + list.get(i).getBbsDate().substring(11, 13) + "시" 
+                        + list.get(i).getBbsDate().substring(14,16) + "분" %></td>
   				</tr>
   				<%
   						}
@@ -233,7 +379,7 @@
   				%>
   			</tbody>
   		</table>
-  		<a href="write.jsp" class="btn btn-primary pull-right">글쓰기</a>
+  		<a href="write.jsp" class="btn btn-primary pull-right" style="color: black; background-color: #B0E0E6; font-family: 'Jua', sans-serif; font-size:18px">글쓰기</a>
   	</div>
   </div>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
