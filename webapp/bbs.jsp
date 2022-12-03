@@ -241,105 +241,104 @@ font-size : 17px;
         </select>
       <input type="submit" value="확인" style="text-align : center; font-family: 'Jua', sans-serif; font-size:20px; background-color:#FA8072; border-color:#FA8072; border-radius:5px;">
      </form>
-     <div style ="display:inline; font-family: 'Jua', sans-serif; font-size:18px;" class="pull-right">수업시간 및 강의실 : </div>
+     <div id="ClassTime" style ="display:inline;"class="pull-right" ></div>
+     
+     <div style ="display:inline; font-family: 'Jua', sans-serif; font-size:18px;" class="pull-right">수업시간 및 강의실 </div>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    
     <%
        SubjectDAO subjectDAO = new SubjectDAO();
        ArrayList<Subject> sublist = subjectDAO.getList();
     %>
      
         <script>
-      function optionChange() {//옵션 바꾸는 함수
-        //1학년 일때
-        var a = ["1학년 과목 선택"];
-        <%
-        for(int i=0; i<sublist.size(); i++) {
-           if(sublist.get(i).getGrade()==1){
-           %>
-           a.push("<%= sublist.get(i).getSubName() %> - <%= sublist.get(i).getProfessor() %>");
-           <%
-           }}
-           %>
-        var b = ["2학년 과목 선택"];
-        <%
-        for(int i=0; i<sublist.size(); i++) {
-           if(sublist.get(i).getGrade()==2){
-           %>
-           b.push("<%= sublist.get(i).getSubName() %> - <%= sublist.get(i).getProfessor() %>");
-           <%
-           }}
-           %>
-        var c = ["3학년 과목 선택"];
-        <%
-        for(int i=0; i<sublist.size(); i++) {
-           if(sublist.get(i).getGrade()==3){
-           %>
-           c.push("<%= sublist.get(i).getSubName() %> - <%= sublist.get(i).getProfessor() %>");
-           <%
-           }}
-           %>
-        var d = ["4학년 과목 선택"];
-        <%
-        for(int i=0; i<sublist.size(); i++) {
-           if(sublist.get(i).getGrade()==4){
-           %>
-           d.push("<%= sublist.get(i).getSubName() %> - <%= sublist.get(i).getProfessor() %>");
-           <%
-           }}
-           %>
-        var v = $( '#Grade' ).val(); //학년 value 저장
-        var o;
-        if ( v == '1' ) {
-          o = a;
-        } else if ( v == '2' ) {
-          o = b;
-        } else if ( v == '3' ) {
-          o = c;
-        } else if ( v == '4') {
-           o = d;
-        } else {
-           o = [];
-        }
-           $( '#Subject' ).empty();
-           for ( var i = 0; i < o.length; i++ ) {
-                 
-        	   if(v=='1'){
-                   var ID = String(i);
-                   $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
-                   
-                 }
-                 if(v=='2'){
-                    
-                    var ID = String(i+a.length);
-                    $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
-                }
-                 if(v=='3'){
-                    var ID = String(i+a.length+b.length);
-                
-                    $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
-                                          }
-                 if(v=='4'){
-                    var ID = String(i+a.length+b.length+c.length);
-                 
-                    $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
-                    }
+        function optionChange() {//옵션 바꾸는 함수
+            //1학년 일때
+            var a = [];
+            <%
+            for(int i=0; i<sublist.size(); i++) {
+               if(sublist.get(i).getGrade()==1){
+               %>
+               a.push("<%= sublist.get(i).getSubName() %>"+" - "+"<%=sublist.get(i).getProfessor() %>");
+               <%
+               }}
+               %>
+            var b = [];
+            <%
+            for(int i=0; i<sublist.size(); i++) {
+               if(sublist.get(i).getGrade()==2){
+               %>
+               b.push("<%= sublist.get(i).getSubName() %>"+" - "+"<%=sublist.get(i).getProfessor() %>");
+               <%
+               }}
+               %>
+            var c = [];
+            <%
+            for(int i=0; i<sublist.size(); i++) {
+               if(sublist.get(i).getGrade()==3){
+               %>
+               c.push("<%= sublist.get(i).getSubName() %>"+" - "+"<%=sublist.get(i).getProfessor() %>");
+               <%
+               }}
+               %>
+            var d = [];
+            <%
+            for(int i=0; i<sublist.size(); i++) {
+               if(sublist.get(i).getGrade()==4){
+               %>
+               d.push("<%= sublist.get(i).getSubName() %>"+" - "+"<%=sublist.get(i).getProfessor() %>");
+               <%
+               }}
+               %>
+            var v = $( '#Grade' ).val(); //학년 value 저장
+            var o;
+            if ( v == '1' ) {
+              o = a;
+            } else if ( v == '2' ) {
+              o = b;
+            } else if ( v == '3' ) {
+              o = c;
+            } else if ( v == '4') {
+               o = d;
+            } else {
+               o = [];
+            }
+               $( '#Subject' ).empty();
+               for ( var i = 0; i < o.length; i++ ) {
+                     
+                       if(v=='1'){
+                          var ID = String(i+1);
+                          $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+                          
+                        }
+                        if(v=='2'){
+                           
+                           var ID = String(i+1+a.length);
+                           $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+                       }
+                        if(v=='3'){
+                           var ID = String(i+1+a.length+b.length);
+                       
+                           $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+                                                 }
+                        if(v=='4'){
+                           var ID = String(i+1+a.length+b.length+c.length);
+                        
+                           $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+                           }
 
-           }
-      }
-      function optionChange2() {//옵션 바꾸는 함수
-          var value = parseInt($('#Subject').val())-1;
-            var classTime = [];
+               }
+               
+          }
+      var classTime = [];
+      <%
+       for(int i=0; i<sublist.size(); i++) {
+          
+          %>
+          classTime.push('<%= sublist.get(i).getClassTime() %>');
           <%
-           for(int i=0; i<sublist.size(); i++) {
-              
-              %>
-              classTime.push('<%= sublist.get(i).getClassTime() %>');
-              <%
-              }
-              %>
-          $( '#ClassTime' ).empty();
-          $( '#ClassTime' ).append( '<p>' + classTime[value]+ '</p>' );
-       }
-
+          }
+          %>
     </script>
   <%	if(request.getParameter("Subject_bbs")!=null){
   			SubID = Integer.parseInt(request.getParameter("Subject_bbs")); 
@@ -377,6 +376,10 @@ font-size : 17px;
   						}
   					}
   				%>
+  				<script>
+               var value = <%=SubID%>;
+               $( '#ClassTime' ).append( '<div style ="display:inline;" class="pull-right" >' + " : " +classTime[value-1]+ '</div>' );
+                  </script>
   			</tbody>
   		</table>
   		<a href="write.jsp" class="btn btn-primary pull-right" style="color: black; background-color: #B0E0E6; font-family: 'Jua', sans-serif; font-size:18px">글쓰기</a>

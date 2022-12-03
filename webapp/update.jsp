@@ -189,7 +189,7 @@ background-color: #F0FFFF ;
                <thead>
                   <tr>
                   <div style="height:30px;"></div>
-                     <th colspan="2" style="background-color:#B0E0E6; color: #000080; font-family: 'Jua', sans-serif; font-size:20px; text-align: center;">글 수정 양식</th>
+                     <th colspan="2" style="background-color:#B0E0E6; color: #000080; font-size:20px; text-align: center;">글 수정 양식</th>
                   </tr>
                </thead>
                <tbody>

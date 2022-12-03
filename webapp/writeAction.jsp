@@ -31,15 +31,21 @@
 
 			int SubID = Integer.parseInt(request.getParameter("Subject_write")); //select-option 태그에서 과목 ID 받아오기
 			String topic = request.getParameter("topic");
-			int currentPeople = Integer.parseInt(request.getParameter("currentPeople"));
-	        int totalPeople = Integer.parseInt(request.getParameter("totalPeople"));
-	        if(currentPeople > totalPeople) {
-	            PrintWriter script = response.getWriter();
-	            script.println("<script>");
-	            script.println("alert('현재 인원이 총 인원을 초과합니다. ')");
-	            script.println("history.back()"); //이전 페이지로 사용자를 돌려보냄
-	            script.println("</script>");
-	         }
+			
+			int currentPeople = 11;
+	        int totalPeople = 11;
+	        
+	        if(request.getParameter("currentPeople")!= null && request.getParameter("totalPeople")!=null){
+				currentPeople = Integer.parseInt(request.getParameter("currentPeople"));
+		        totalPeople = Integer.parseInt(request.getParameter("totalPeople"));
+		        if(currentPeople > totalPeople) {
+		            PrintWriter script = response.getWriter();
+		            script.println("<script>");
+		            script.println("alert('현재 인원이 총 인원을 초과합니다. ')");
+		            script.println("history.back()"); //이전 페이지로 사용자를 돌려보냄
+		            script.println("</script>");
+		         }
+	        }
 	        
 			if(bbs.getBbsTitle()==null || bbs.getBbsContent() == null || SubID==0){ //SubID==0 : 과목을 선택하지 않은 경우
 				PrintWriter script = response.getWriter();
