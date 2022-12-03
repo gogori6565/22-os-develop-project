@@ -209,7 +209,7 @@ table {
             <thead>
              <div style="height:50px;"></div>
                <tr>
-                  <th colspan="2" style="background-color: #B0E0E6; color: #000080; font-family: 'Jua', sans-serif; font-size:20px; text-align: center;">게시판 글쓰기 양식</th>
+                  <th colspan="2" style="background-color: #B0E0E6; color: #000080; font-size:20px; text-align: center;">게시판 글쓰기 양식</th>
                </tr>
             </thead>
             <tbody>
