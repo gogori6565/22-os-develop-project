@@ -6,6 +6,8 @@
 ## 프로젝트
 충북대학교 소프트웨어학과 과목별 게시판
 
+![image](https://user-images.githubusercontent.com/81895590/205443664-2e0728e1-b6a8-4cf1-bd40-4455f1c71ac2.png)
+
 ## 기능
 
 1. 로그인 / 회원가입
