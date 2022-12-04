@@ -261,89 +261,90 @@ table {
 							        </select>
 							     </form>
 							         <%
-							       SubjectDAO subjectDAO = new SubjectDAO();
-							       ArrayList<Subject> sublist = subjectDAO.getList();
-							    %>
-							     
-							        <script>
-							      function optionChange() {//옵션 바꾸는 함수
-							        //1학년 일때
-							        var a = ["1학년 과목 선택"];
-							        <%
-							        for(int i=0; i<sublist.size(); i++) {
-							           if(sublist.get(i).getGrade()==1){
-							           %>
-							           a.push("<%= sublist.get(i).getSubName() %> - <%= sublist.get(i).getProfessor() %>");
-							           <%
-							           }}
-							           %>
-							        var b = ["2학년 과목 선택"];
-							        <%
-							        for(int i=0; i<sublist.size(); i++) {
-							           if(sublist.get(i).getGrade()==2){
-							           %>
-							           b.push("<%= sublist.get(i).getSubName() %> - <%= sublist.get(i).getProfessor() %>");
-							           <%
-							           }}
-							           %>
-							        var c = ["3학년 과목 선택"];
-							        <%
-							        for(int i=0; i<sublist.size(); i++) {
-							           if(sublist.get(i).getGrade()==3){
-							           %>
-							           c.push("<%= sublist.get(i).getSubName() %> - <%= sublist.get(i).getProfessor() %>");
-							           <%
-							           }}
-							           %>
-							        var d = ["4학년 과목 선택"];
-							        <%
-							        for(int i=0; i<sublist.size(); i++) {
-							           if(sublist.get(i).getGrade()==4){
-							           %>
-							           d.push("<%= sublist.get(i).getSubName() %> - <%= sublist.get(i).getProfessor() %>");
-							           <%
-							           }}
-							           %>
-							        var v = $( '#Grade' ).val(); //학년 value 저장
-							        var o;
-							        if ( v == '1' ) {
-							          o = a;
-							        } else if ( v == '2' ) {
-							          o = b;
-							        } else if ( v == '3' ) {
-							          o = c;
-							        } else if ( v == '4') {
-							           o = d;
-							        } else {
-							           o = [];
-							        }
-							           $( '#Subject' ).empty();
-							           for ( var i = 0; i < o.length; i++ ) {
-							                 
-							        	   if(v=='1'){
-							                   var ID = String(i);
-							                   $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
-							                   
-							                 }
-							                 if(v=='2'){
-							                    
-							                    var ID = String(i+a.length);
-							                    $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
-							                }
-							                 if(v=='3'){
-							                    var ID = String(i+a.length+b.length);
-							                
-							                    $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
-							                                          }
-							                 if(v=='4'){
-							                    var ID = String(i+a.length+b.length+c.length);
-							                 
-							                    $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
-							                    }
-							
-							           }
-							      }
-							    </script>
+                            SubjectDAO subjectDAO = new SubjectDAO();
+                            ArrayList<Subject> sublist = subjectDAO.getList();
+                         %>
+                          
+                              <script>
+						      function optionChange() {//옵션 바꾸는 함수
+						        //1학년 일때
+						        var a = [];
+						        <%
+						        for(int i=0; i<sublist.size(); i++) {
+						           if(sublist.get(i).getGrade()==1){
+						           %>
+						           a.push("<%= sublist.get(i).getSubName() %>"+" - "+"<%=sublist.get(i).getProfessor() %>");
+						           <%
+						           }}
+						           %>
+						        var b = [];
+						        <%
+						        for(int i=0; i<sublist.size(); i++) {
+						           if(sublist.get(i).getGrade()==2){
+						           %>
+						           b.push("<%= sublist.get(i).getSubName() %>"+" - "+"<%=sublist.get(i).getProfessor() %>");
+						           <%
+						           }}
+						           %>
+						        var c = [];
+						        <%
+						        for(int i=0; i<sublist.size(); i++) {
+						           if(sublist.get(i).getGrade()==3){
+						           %>
+						           c.push("<%= sublist.get(i).getSubName() %>"+" - "+"<%=sublist.get(i).getProfessor() %>");
+						           <%
+						           }}
+						           %>
+						        var d = [];
+						        <%
+						        for(int i=0; i<sublist.size(); i++) {
+						           if(sublist.get(i).getGrade()==4){
+						           %>
+						           d.push("<%= sublist.get(i).getSubName() %>"+" - "+"<%=sublist.get(i).getProfessor() %>");
+						           <%
+						           }}
+						           %>
+						        var v = $( '#Grade' ).val(); //학년 value 저장
+						        var o;
+						        if ( v == '1' ) {
+						          o = a;
+						        } else if ( v == '2' ) {
+						          o = b;
+						        } else if ( v == '3' ) {
+						          o = c;
+						        } else if ( v == '4') {
+						           o = d;
+						        } else {
+						           o = [];
+						        }
+						           $( '#Subject' ).empty();
+						           for ( var i = 0; i < o.length; i++ ) {
+						                 
+						                   if(v=='1'){
+						                      var ID = String(i+1);
+						                      $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+						                      
+						                    }
+						                    if(v=='2'){
+						                       
+						                       var ID = String(i+1+a.length);
+						                       $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+						                   }
+						                    if(v=='3'){
+						                       var ID = String(i+1+a.length+b.length);
+						                   
+						                       $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+						                                             }
+						                    if(v=='4'){
+						                       var ID = String(i+1+a.length+b.length+c.length);
+						                    
+						                       $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+						                       }
+						
+						           }
+						           
+						      }
+                         </script>
 							  </div>
 	  					</td>
 	  				</tr>
