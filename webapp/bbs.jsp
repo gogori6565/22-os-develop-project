@@ -250,86 +250,85 @@ font-size : 17px;
        SubjectDAO subjectDAO = new SubjectDAO();
        ArrayList<Subject> sublist = subjectDAO.getList();
     %>
-     
-        <script>
-        function optionChange() {//옵션 바꾸는 함수
-            //1학년 일때
-            var a = [];
-            <%
-            for(int i=0; i<sublist.size(); i++) {
-               if(sublist.get(i).getGrade()==1){
-               %>
-               a.push("<%= sublist.get(i).getSubName() %>"+" - "+"<%=sublist.get(i).getProfessor() %>");
-               <%
-               }}
-               %>
-            var b = [];
-            <%
-            for(int i=0; i<sublist.size(); i++) {
-               if(sublist.get(i).getGrade()==2){
-               %>
-               b.push("<%= sublist.get(i).getSubName() %>"+" - "+"<%=sublist.get(i).getProfessor() %>");
-               <%
-               }}
-               %>
-            var c = [];
-            <%
-            for(int i=0; i<sublist.size(); i++) {
-               if(sublist.get(i).getGrade()==3){
-               %>
-               c.push("<%= sublist.get(i).getSubName() %>"+" - "+"<%=sublist.get(i).getProfessor() %>");
-               <%
-               }}
-               %>
-            var d = [];
-            <%
-            for(int i=0; i<sublist.size(); i++) {
-               if(sublist.get(i).getGrade()==4){
-               %>
-               d.push("<%= sublist.get(i).getSubName() %>"+" - "+"<%=sublist.get(i).getProfessor() %>");
-               <%
-               }}
-               %>
-            var v = $( '#Grade' ).val(); //학년 value 저장
-            var o;
-            if ( v == '1' ) {
-              o = a;
-            } else if ( v == '2' ) {
-              o = b;
-            } else if ( v == '3' ) {
-              o = c;
-            } else if ( v == '4') {
-               o = d;
-            } else {
-               o = [];
-            }
-               $( '#Subject' ).empty();
-               for ( var i = 0; i < o.length; i++ ) {
-                     
-                       if(v=='1'){
-                          var ID = String(i+1);
-                          $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
-                          
-                        }
-                        if(v=='2'){
-                           
-                           var ID = String(i+1+a.length);
-                           $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
-                       }
-                        if(v=='3'){
-                           var ID = String(i+1+a.length+b.length);
+     <script>
+      function optionChange() {//옵션 바꾸는 함수
+        //1학년 일때
+        var a = [];
+        <%
+        for(int i=0; i<sublist.size(); i++) {
+           if(sublist.get(i).getGrade()==1){
+           %>
+           a.push("<%= sublist.get(i).getSubName() %>"+" - "+"<%=sublist.get(i).getProfessor() %>");
+           <%
+           }}
+           %>
+        var b = [];
+        <%
+        for(int i=0; i<sublist.size(); i++) {
+           if(sublist.get(i).getGrade()==2){
+           %>
+           b.push("<%= sublist.get(i).getSubName() %>"+" - "+"<%=sublist.get(i).getProfessor() %>");
+           <%
+           }}
+           %>
+        var c = [];
+        <%
+        for(int i=0; i<sublist.size(); i++) {
+           if(sublist.get(i).getGrade()==3){
+           %>
+           c.push("<%= sublist.get(i).getSubName() %>"+" - "+"<%=sublist.get(i).getProfessor() %>");
+           <%
+           }}
+           %>
+        var d = [];
+        <%
+        for(int i=0; i<sublist.size(); i++) {
+           if(sublist.get(i).getGrade()==4){
+           %>
+           d.push("<%= sublist.get(i).getSubName() %>"+" - "+"<%=sublist.get(i).getProfessor() %>");
+           <%
+           }}
+           %>
+        var v = $( '#Grade' ).val(); //학년 value 저장
+        var o;
+        if ( v == '1' ) {
+          o = a;
+        } else if ( v == '2' ) {
+          o = b;
+        } else if ( v == '3' ) {
+          o = c;
+        } else if ( v == '4') {
+           o = d;
+        } else {
+           o = [];
+        }
+           $( '#Subject' ).empty();
+           for ( var i = 0; i < o.length; i++ ) {
+                 
+                   if(v=='1'){
+                      var ID = String(i+1);
+                      $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+                      
+                    }
+                    if(v=='2'){
                        
-                           $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
-                                                 }
-                        if(v=='4'){
-                           var ID = String(i+1+a.length+b.length+c.length);
-                        
-                           $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
-                           }
+                       var ID = String(i+1+a.length);
+                       $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+                   }
+                    if(v=='3'){
+                       var ID = String(i+1+a.length+b.length);
+                   
+                       $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+                                             }
+                    if(v=='4'){
+                       var ID = String(i+1+a.length+b.length+c.length);
+                    
+                       $( '#Subject' ).append( '<option value='+ID+'>' + o[ i ] + '</option>' );
+                       }
 
-               }
-               
-          }
+           }
+           
+      }
       var classTime = [];
       <%
        for(int i=0; i<sublist.size(); i++) {
@@ -339,7 +338,7 @@ font-size : 17px;
           <%
           }
           %>
-    </script>
+      </script>
   <%	if(request.getParameter("Subject_bbs")!=null){
   			SubID = Integer.parseInt(request.getParameter("Subject_bbs")); 
   		}
@@ -359,28 +358,44 @@ font-size : 17px;
                     </tr>
                 </thead>
   			<tbody>
-  				<%
-  					BbsDAO bbsDAO = new BbsDAO();
-  					ArrayList<Bbs> list = bbsDAO.getList(pageNumber); //게시글 list 반환
-  					for(int i=0; i<list.size(); i++){
-  						if(list.get(i).getSubject()==SubID){ //Subject 칼럼값 별로 띄우기
-  				%>
-  				<tr>
-  					<td style="font-family: 'Gothic A1', sans-serif; color:red; font-weight: bold;"><%=list.get(i).getTopic() %></td>
+              <%
+                 BbsDAO bbsDAO = new BbsDAO();
+                 ArrayList<Bbs> list = bbsDAO.getList(pageNumber); //게시글 list 반환
+                 for(int i=0; i<list.size(); i++){
+                    if(SubID!=0){
+                    if(list.get(i).getSubject()==SubID){ //Subject 칼럼값 별로 띄우기
+              %>
+              <tr>
+                 <td style="font-family: 'Gothic A1', sans-serif; color:red; font-weight: bold;"><%=list.get(i).getTopic() %></td>
                         <td style="font-family: 'Gothic A1', sans-serif;"><a href="view.jsp?bbsID=<%=list.get(i).getBbsID()%>" style="color:#000000; text-decoration:none;" ><%=list.get(i).getBbsTitle() %></a></td>
                         <td style="font-family: 'Gothic A1', sans-serif;"><%=list.get(i).getUserID() %></td>
                         <td style="font-family: 'Gothic A1', sans-serif;"><%=list.get(i).getBbsDate().substring(0,11) + list.get(i).getBbsDate().substring(11, 13) + "시" 
                         + list.get(i).getBbsDate().substring(14,16) + "분" %></td>
-  				</tr>
-  				<%
-  						}
-  					}
-  				%>
-  				<script>
+              </tr>
+              <%
+                    }
+                 }
+                    else{
+                       %>
+                       <tr>
+                 <td style="font-family: 'Gothic A1', sans-serif; color:red; font-weight: bold;"><%=list.get(i).getTopic() %></td>
+                        <td style="font-family: 'Gothic A1', sans-serif;"><a href="view.jsp?bbsID=<%=list.get(i).getBbsID()%>" style="color:#000000; text-decoration:none;" ><%=list.get(i).getBbsTitle() %></a></td>
+                        <td style="font-family: 'Gothic A1', sans-serif;"><%=list.get(i).getUserID() %></td>
+                        <td style="font-family: 'Gothic A1', sans-serif;"><%=list.get(i).getBbsDate().substring(0,11) + list.get(i).getBbsDate().substring(11, 13) + "시" 
+                        + list.get(i).getBbsDate().substring(14,16) + "분" %></td>
+              </tr>
+                       <%
+                    }
+                    }
+              %>
+              <script>
+               <% if(SubID!=0){%>
                var value = <%=SubID%>;
-               $( '#ClassTime' ).append( '<div style ="display:inline;" class="pull-right" >' + " : " +classTime[value-1]+ '</div>' );
-                  </script>
-  			</tbody>
+               value--;
+               $( '#ClassTime' ).append( '<div style ="display:inline;" class="pull-right" >' + " : " +classTime[value]+ '</div>' );
+                <% } %>  
+               </script>
+           </tbody>
   		</table>
   		<a href="write.jsp" class="btn btn-primary pull-right" style="color: black; background-color: #B0E0E6; font-family: 'Jua', sans-serif; font-size:18px">글쓰기</a>
   	</div>

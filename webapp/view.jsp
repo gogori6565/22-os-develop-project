@@ -236,7 +236,7 @@ font-family: 'Gothic A1', sans-serif;
                </tr>
                <tr>
                   <td style="height: 200px; width:20%; font-family: 'Noto Sans KR', sans-serif; font-size:17px;">내용</td>   
-                  <td colspan="2" style="min-height:200px; text-align:left; font-family:'Noto Sans KR', sans-serif; font-size:15px;"><%= bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>;") %></td>
+                  <td colspan="2" style="min-height:200px; text-align:left; font-family:'Noto Sans KR', sans-serif; font-size:15px;"><%= bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n","<br>") %></td>
                </tr>
 
   				<%
@@ -251,7 +251,7 @@ font-family: 'Gothic A1', sans-serif;
   				<tr>
   					<td style="width:20%; font-family: 'Noto Sans KR', sans-serif; font-size:17px;">팀 매칭 현황</td>
   					<td colspan="2" style="text-align:left; font-family:'Noto Sans KR', sans-serif; font-size:15px;"><%= bbs.getCurrentpeople() + " / " + bbs.getTotalpeople() + " - (현재 인원)/(총 인원)"%>
-  					</br>
+  					</br></br>
   					<%
 						for(int i=0; i<list.size(); i++) {
 							if(list.get(i).getBbsID()==bbs.getBbsID()&&list.get(i).getTeamcheck()==1){
